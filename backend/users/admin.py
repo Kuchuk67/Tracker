@@ -7,6 +7,5 @@ from users.models import CustomUser
 class CustomUser(admin.ModelAdmin):
     list_display = ( "email",)
     search_fields = (
-
         "email",
     )

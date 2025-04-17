@@ -14,6 +14,7 @@ from pathlib import Path
 from django.core.management.utils import get_random_secret_key
 import os
 from dotenv import load_dotenv
+from datetime import timedelta
 
 # Загрузка переменных из .env-файла
 load_dotenv()
@@ -53,6 +54,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'users',
     'habit_tracker',
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -142,14 +144,41 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # OpenAPI
-OAS_PATH = BASE_DIR.joinpath("oas.yml")
-
+OAS_PATH = (Path(__file__).resolve()
+            .parent.parent.parent.joinpath("oas.yml"))
 API_VERSION = "api/v1/"
 
 # Rest framework
 _page_paginator = "rest_framework.pagination.PageNumberPagination"
+
+REST_FRAMEWORK = {
+    "DEFAULT_PAGINATION_CLASS": 'rest_framework.pagination.PageNumberPagination',
+    #'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+    #'DEFAULT_PERMISSION_CLASSES': [
+    #    'rest_framework.permissions.IsAuthenticated',
+    #],
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+# Настройки срока действия токенов
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Your Project API',
+    'DESCRIPTION': 'Your project description',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
+}
 
 # CORS
 CORS_ALLOWED_ORIGINS = [
@@ -162,3 +191,5 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 CORS_ALLOW_ALL_ORIGINS = False
+
+

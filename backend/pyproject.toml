@@ -12,6 +12,10 @@ django = "^5.2"
 psycopg2-binary = "^2.9.10"
 djangorestframework = "^3.16.0"
 django-cors-headers = "^4.7.0"
+drf-spectacular = "^0.28.0"
+drf-yasg = "^1.21.10"
+djangorestframework-simplejwt = "^5.5.0"
+pillow = "^11.2.1"
 
 
 [build-system]

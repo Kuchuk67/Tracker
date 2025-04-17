@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
-
+#from django.core.management.utils import get_random_secret_key
 import os
 from dotenv import load_dotenv
 # Загрузка переменных из .env-файла
@@ -25,6 +25,7 @@ SQL_PORT = os.getenv("SQL_PORT")
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+#SECRET_KEY = get_random_secret_key()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -163,5 +164,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
 ]
 
-
+CHANNELS_ALLOWED_WS_ORIGINS = [
+    "http://localhost:8000",
+    "http://localhost:5173",
+]
 

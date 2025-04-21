@@ -9,9 +9,12 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
     )
+from rest_framework.permissions import AllowAny
+from rest_framework import routers
 from config.settings import API_VERSION
 from rest_framework.permissions import AllowAny
 from users.views import UserViewSet, UserCreateAPIView
+from habit_tracker.views import HabitViewsSet
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -23,14 +26,24 @@ schema_view = get_schema_view(
         license=openapi.License(name="BSD License"),
     ),
     public=True,
-    #permission_classes=(permissions.AllowAny,),
 )
+
+router = routers.SimpleRouter(
+    trailing_slash=False,
+)
+router.register(prefix=r'habit',
+                viewset=HabitViewsSet,
+                basename = 'habit'
+                )
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     #path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path("schema/", SpectacularAPIView.as_view(), name="schema"),
     path("swagger/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui" ),
+    # habit_tracker
+    path(API_VERSION, include(router.urls)),
     # users
     path(API_VERSION, include("users.urls", namespace="users")),
 

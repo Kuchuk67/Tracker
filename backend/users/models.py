@@ -6,10 +6,11 @@ from django.contrib.auth.models import AbstractUser
 class CustomUser(AbstractUser):
     username = None
     email = models.EmailField(unique=True)
-    avatar = models.ImageField(upload_to='avatars/',
-                               blank=True,
-                               verbose_name='аватарка'
-                               )
+    api_telegram = models.CharField(max_length=50,
+                              default='expected',
+                              verbose_name='статус ивента',
+                              help_text='Текущий статус данного ивента',
+                              )
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

@@ -12,7 +12,6 @@ from rest_framework.permissions import AllowAny
 app_name = "users"
 
 urlpatterns = [
-    #path('user/', UserViewSet.as_view({'get':'list'}), name='user'),
     path('register/', UserCreateAPIView.as_view(),name='register'),
     path('login/', TokenObtainPairView.as_view(permission_classes=(AllowAny,)),
           name='login'),

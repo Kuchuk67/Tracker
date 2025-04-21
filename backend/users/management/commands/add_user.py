@@ -21,7 +21,7 @@ class Command(BaseCommand):
 
         CustomUser.objects.get_or_create(
             pk=2,
-            username='User',
+            
             email='user@mail.ru',
             password='12345',
             is_active = True

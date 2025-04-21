@@ -14,6 +14,8 @@ class UserViewSet(ModelViewSet):
 class UserCreateAPIView(CreateAPIView):
     serializer_class = UserCreateSerializer
     queryset = CustomUser.objects.all()
+    
+
 
 
 

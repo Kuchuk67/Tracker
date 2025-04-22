@@ -14,7 +14,7 @@ from rest_framework import routers
 from config.settings import API_VERSION
 from rest_framework.permissions import AllowAny
 from users.views import UserViewSet, UserCreateAPIView
-from habit_tracker.views import HabitViewsSet
+
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -28,13 +28,6 @@ schema_view = get_schema_view(
     public=True,
 )
 
-router = routers.SimpleRouter(
-    trailing_slash=False,
-)
-router.register(prefix=r'habit',
-                viewset=HabitViewsSet,
-                basename = 'habit'
-                )
 
 
 urlpatterns = [
@@ -43,7 +36,7 @@ urlpatterns = [
     path("schema/", SpectacularAPIView.as_view(), name="schema"),
     path("swagger/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui" ),
     # habit_tracker
-    path(API_VERSION, include(router.urls)),
+    path(API_VERSION, include("habit_tracker.urls", namespace="habit")),
     # users
     path(API_VERSION, include("users.urls", namespace="users")),
 

@@ -19,13 +19,15 @@ class Command(BaseCommand):
         user.is_superuser = True
         user.save()
 
-        CustomUser.objects.get_or_create(
-            pk=2,
-            
-            email='user@mail.ru',
-            password='12345',
-            is_active = True
+        user = CustomUser.objects.create(
+            email="user@mail.ru",
         )
+        user.set_password("12345")
+        user.is_active = True
+        user.is_staff = True
+        user.is_superuser = True
+        user.save()
+
 
         # Создаем новую группу
         #new_group, created = Group.objects.get_or_create(name="Модератор")

@@ -33,8 +33,8 @@ schema_view = get_schema_view(
 urlpatterns = [
     path('admin/', admin.site.urls),
     #path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    path("schema/", SpectacularAPIView.as_view(), name="schema"),
-    path("swagger/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui" ),
+    path("api/v1/schema/", SpectacularAPIView.as_view(), name="schema"),
+    path("api/v1/swagger/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui" ),
     # habit_tracker
     path(API_VERSION, include("habit_tracker.urls", namespace="habit")),
     # users

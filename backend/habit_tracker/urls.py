@@ -18,7 +18,7 @@ app_name = "habit"
 
 urlpatterns = [
     # habit_tracker
-    path(API_VERSION, include(router.urls)),
+    path('', include(router.urls)),
     path("habit_list/", HabitListViews.as_view(), name="habit_list"),
 
 

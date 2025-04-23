@@ -20,6 +20,4 @@ urlpatterns = [
     # habit_tracker
     path('', include(router.urls)),
     path("habit_list/", HabitListViews.as_view(), name="habit_list"),
-
-
 ]

@@ -159,7 +159,7 @@ API_VERSION = "api/v1/"
 _page_paginator = "rest_framework.pagination.PageNumberPagination"
 
 REST_FRAMEWORK = {
-    "DEFAULT_PAGINATION_CLASS": 'rest_framework.pagination.PageNumberPagination',
+    #"DEFAULT_PAGINATION_CLASS": 'rest_framework.pagination.PageNumberPagination',
     #'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -168,6 +168,8 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ],
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 2
 }
 
 # Настройки срока действия токенов

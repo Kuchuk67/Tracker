@@ -8,14 +8,15 @@ class HabitSerializer(ModelSerializer):
 
     class Meta:
         model = Habit
-        fields = "__all__"
+        fields = ["place",
+                  "day_action",
+                  "time_action",
+                  "action",
+                  "nice",
+                  "related",
+                  "period",
+                  "reward",
+                  "time",
+                  "pablic",
+                  "user", ]
         
-    def to_representation(self, value):
-        #return "rgb(%d, %d, %d)" % (value.red, value.green, value.blue)
-        return  222 # int(value.day_action) + 1
-
-    def to_internal_value(self, data):
-        data = data.get('day_action')
-        #red, green, blue = [int(col) for col in data.split(',')]
-        return 555 #int(data) - 1
-        #pass

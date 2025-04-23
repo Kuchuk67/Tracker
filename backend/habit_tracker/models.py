@@ -38,12 +38,12 @@ class Habit(models.Model):
     nice = models.BooleanField(default=False, 
                             verbose_name="Признак приятной привычки"
                             )
-    related = models.ForeignKey(CustomUser, 
+    related = models.ForeignKey('self',
                             default=None,
                             null=True,
                             blank=True, 
                             on_delete=models.CASCADE,
-                            related_name="related", 
+                            related_name="to_related",
                             verbose_name="ссылка на полезную привычку"
                             )
     period = models.IntegerField(null=True,

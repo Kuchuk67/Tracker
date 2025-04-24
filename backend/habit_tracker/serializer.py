@@ -36,4 +36,9 @@ class HabitSerializer(ModelSerializer):
         ret['action'] = ret['action'] + " Ура !!"
         print(ret)
         return ret'''
+
+    def to_internal_value(self, data):
+        print("********",data)
+        valid = super().to_internal_value(data)
+        return valid
         

@@ -152,7 +152,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # OpenAPI
-OAS_PATH = BASE_DIR.joinpath("oas.yml")
+#OAS_PATH = BASE_DIR.joinpath("oas.yml")
 API_VERSION = "api/v1/"
 
 # Rest framework
@@ -168,8 +168,9 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ],
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 2
+    'PAGE_SIZE': 5
 }
 
 # Настройки срока действия токенов
@@ -179,8 +180,10 @@ SIMPLE_JWT = {
 }
 
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'Your Project API',
-    'DESCRIPTION': 'Your project description',
+    'SCHEMA_PATH_PREFIX': '/api/v[0-9]',
+    'TITLE': 'Habit Project API',
+    'DESCRIPTION': 'В рамках проекта реализована бэкенд-часть '
+                   'SPA веб-приложения - трекер полезных привычек.',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
     # OTHER SETTINGS

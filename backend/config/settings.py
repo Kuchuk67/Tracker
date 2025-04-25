@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'habit_tracker',
     'drf_spectacular',
     'telegram_bot',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -90,6 +91,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
+ASGI_APPLICATION = 'myproject.asgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases

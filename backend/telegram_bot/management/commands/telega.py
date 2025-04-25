@@ -20,8 +20,14 @@ class Command(BaseCommand):
         ]
         return InlineKeyboardMarkup(keyboard)
 
-    def qqq(self, update):
-        return CustomUser.objects.get(nick_telegram=update.effective_chat.username)
+
+    
+    @database_sync_to_async
+    def add_id_chat(self, update):
+        user = CustomUser.objects.get(nick_telegram=update.effective_chat.username)
+        user.chat_id_telegram = update.effective_chat.id
+        user.save()
+        return user
 
     def handle(self, *args, **kwargs):
 
@@ -37,7 +43,7 @@ class Command(BaseCommand):
             # Тут надо найти в БД пользователя с ником телеграма
 
             try:
-                user = await database_sync_to_async(self.qqq(update))()
+                user = await self.add_id_chat(update)
             except Exception as e:
                 print("=====", e)
 
@@ -49,9 +55,12 @@ class Command(BaseCommand):
                                                )
             else:
                 # найдено - записываем туда chat_id и пишем - ок
-                user.chat_id_telegram = update.effective_chat.id
-                user.save()
-                await update.message.reply_text('Пожалуйста, выберите:', reply_markup=self.button_bot(update))
+
+                
+                await update.message.reply_text(
+                    'Пожалуйста, выберите:', 
+                    reply_markup=self.button_bot(update)
+                    )
 
         async def button(update, _):
             query = update.callback_query

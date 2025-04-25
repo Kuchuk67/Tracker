@@ -5,7 +5,8 @@ from users.models import CustomUser
 from aiogram.types import ReplyKeyboardRemove, ReplyKeyboardMarkup, KeyboardButton
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.ext import Updater, CommandHandler, CallbackQueryHandler
-
+from channels.db import database_sync_to_async
+from channels.db import database_sync_to_async
 
 class Command(BaseCommand):
 
@@ -19,9 +20,12 @@ class Command(BaseCommand):
         ]
         return InlineKeyboardMarkup(keyboard)
 
-
+    def qqq(self, update):
+        return CustomUser.objects.get(nick_telegram=update.effective_chat.username)
 
     def handle(self, *args, **kwargs):
+
+
         async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
@@ -29,11 +33,14 @@ class Command(BaseCommand):
             await context.bot.send_message(chat_id=update.effective_chat.id,
                                            text="Привет! Я бот трекер-сарвиса 'Атомарные привычки'!"
                                            )
-
+            print("*********", update.effective_chat.username)
             # Тут надо найти в БД пользователя с ником телеграма
+
             try:
-                user = CustomUser.objects.get(nick_telegram=update.effective_chat.username)
-            except:
+                user = await database_sync_to_async(self.qqq(update))()
+            except Exception as e:
+                print("=====", e)
+
                 # НЕ найдено - пишем что надо зарегится на сервисе
                 await context.bot.send_message(chat_id=update.effective_chat.id,
                                                text="Не найден такой ник. Вам надо зарегится на сервисе "
@@ -46,26 +53,26 @@ class Command(BaseCommand):
                 user.save()
                 await update.message.reply_text('Пожалуйста, выберите:', reply_markup=self.button_bot(update))
 
+        async def button(update, _):
+            query = update.callback_query
+            variant = query.data
+            # `CallbackQueries` требует ответа, даже если
+            # уведомление для пользователя не требуется, в противном
+            #  случае у некоторых клиентов могут возникнуть проблемы.
+            # смотри https://core.telegram.org/bots/api#callbackquery.
+            await query.answer()
 
+            # редактируем сообщение, тем самым кнопки
+            # в чате заменятся на этот ответ.
+            await query.edit_message_text(text=f"Выбранный вариант: {variant}")
 
+        # Токен телеграма
         application = ApplicationBuilder().token('7507147736:AAEOYdf3erBfJ-x7unESp431YfAgufAAQ50').build()
-
+        # Добавить обработчик /start
         start_handler = CommandHandler('start', start)
         application.add_handler(start_handler)
-
+        # Добавить обработчик  нажатия кнопки
+        application.add_handler(CallbackQueryHandler(button))
+        # Зацикливание
         application.run_polling()
 
-    """async def send_welcome(message: types.Message):
-            kb = [
-                [
-                    KeyboardButton(text="Сможешь повторить это?"),
-                    KeyboardButton(text="А это?")
-                ],
-            ]
-            keyboard = ReplyKeyboardMarkup(keyboard=kb)
-
-            await message.reply(
-                "Привет!\nЯ Эхобот от Skillbox!\nОтправь мне любое сообщение, а я тебе обязательно отвечу.",
-                reply_markup=keyboard)
-
-        application.run_polling()"""

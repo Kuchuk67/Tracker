@@ -19,6 +19,7 @@ djangorestframework-simplejwt = "^5.5.0"
 pillow = "^11.2.1"
 python-telegram-bot = "^22.0"
 aiogram = "^3.20.0.post0"
+channels = "^4.2.2"
 
 
 [build-system]

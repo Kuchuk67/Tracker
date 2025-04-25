@@ -59,7 +59,7 @@ class Habit(models.Model):
                             )  
     time = models.IntegerField(null=True,
                                 blank=True,
-                                verbose_name='время на выполнение привычки'
+                                verbose_name='время на выполнение привычки в секундах'
                                 )
     public = models.BooleanField(default=False,
                                 verbose_name="привычки можно публиковать в общий доступ"

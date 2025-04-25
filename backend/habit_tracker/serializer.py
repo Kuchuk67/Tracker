@@ -2,7 +2,12 @@ from rest_framework.serializers import (ModelSerializer,
                                         SerializerMethodField,
                                         )
 from habit_tracker.models import Habit
-from habit_tracker.validators import SimultaneousSelected, TimeValid
+from habit_tracker.validators import (SimultaneousSelected,
+                                        TimeValid,
+                                        SignNice,
+                                        HabitNiceValid,
+                                        PeriodValid,
+                                      )
 
 class HabitSerializer(ModelSerializer):
 
@@ -22,6 +27,9 @@ class HabitSerializer(ModelSerializer):
                   "user", ]
         validators = (SimultaneousSelected(),
                       TimeValid(),
+                      SignNice(),
+                      HabitNiceValid(),
+                      PeriodValid(),
                       )
         
     '''def to_representation(self, instance):

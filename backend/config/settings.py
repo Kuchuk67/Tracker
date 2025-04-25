@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'users',
     'habit_tracker',
     'drf_spectacular',
+    'telegram_bot',
 ]
 
 MIDDLEWARE = [

@@ -18,10 +18,10 @@ class Habit(models.Model):
                             verbose_name='место выполнения привычки',
                             help_text='место, в котором необходимо выполнять привычку',
                             )
-    day_action = models.IntegerField(null=True,
+    """day_action = models.IntegerField(null=True,
                             blank=True,
                             verbose_name='день недели, когда необходимо выполнять привычку'
-                            ) 
+                            ) """
     time_action = models.TimeField(default=None,
                             null=True,
                             blank=True,
@@ -61,7 +61,7 @@ class Habit(models.Model):
                                 blank=True,
                                 verbose_name='время на выполнение привычки'
                                 )
-    pablic = models.BooleanField(default=False, 
+    public = models.BooleanField(default=False,
                                 verbose_name="привычки можно публиковать в общий доступ"
                                 ) 
 

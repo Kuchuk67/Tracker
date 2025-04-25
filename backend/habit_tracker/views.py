@@ -25,5 +25,5 @@ class HabitViewsSet(ModelViewSet):
 class HabitListViews(ListAPIView):
     # pagination_class = EducationPagination
     serializer_class = HabitSerializer
-    queryset = Habit.objects.filter(pablic=True)
+    queryset = Habit.objects.filter(public=True)
 

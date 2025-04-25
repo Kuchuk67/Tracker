@@ -1,0 +1,70 @@
+[
+{
+    "model": "habit_tracker.habit",
+    "pk": 1,
+    "fields": {
+        "user": 2,
+        "place": "дом",
+        "day_action": 0,
+        "time_action": "06:45:00",
+        "action": "Посмотреть подкаст",
+        "nice": true,
+        "related": null,
+        "period": 1,
+        "reward": null,
+        "time": 15,
+        "public": false
+    }
+},
+{
+    "model": "habit_tracker.habit",
+    "pk": 2,
+    "fields": {
+        "user": 2,
+        "place": "дом",
+        "day_action": 0,
+        "time_action": "06:45:00",
+        "action": "Вытащить тренажор",
+        "nice": false,
+        "related": 1,
+        "period": 1,
+        "reward": null,
+        "time": 60,
+        "public": true
+    }
+},
+{
+    "model": "habit_tracker.habit",
+    "pk": 3,
+    "fields": {
+        "user": 1,
+        "place": "офис",
+        "day_action": 5,
+        "time_action": "10:01:00",
+        "action": "проверить работу сайта",
+        "nice": false,
+        "related": null,
+        "period": 60,
+        "reward": "выпить кофе",
+        "time": 120,
+        "public": true
+    }
+},
+{
+    "model": "habit_tracker.habit",
+    "pk": 7,
+    "fields": {
+        "user": 2,
+        "place": "по пути на работу",
+        "day_action": 2,
+        "time_action": "08:00:00",
+        "action": "Пройти мимо автобусной остановки",
+        "nice": false,
+        "related": null,
+        "period": 7,
+        "reward": "купить кофе",
+        "time": 10,
+        "public": false
+    }
+}
+]

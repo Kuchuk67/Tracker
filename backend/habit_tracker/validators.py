@@ -69,8 +69,19 @@ class PeriodValid:
     """
     requires_context = True
     def __call__(self, value, serializer_field):
-        if value.get("period") > 7 or value.get("period") <= 0:
+        """if value.get("period") > 7 or value.get("period") <= 0:
             raise exceptions.UnprocessableEntityError(
                 dict(error="ValidationError",
                      serial="period - должно быть в пределах 1-120 секунд.")
-            )
+            )"""
+        day_of_week = value.get("period").split(',')
+        for day in day_of_week:
+            if not day.isdigit():
+               raise exceptions.UnprocessableEntityError(dict(error="ValidationError",
+                     serial="period - должно быть в пределах '1,2,3,4,5,6,0'.")
+               )
+            if int(day) > 6:
+                raise exceptions.UnprocessableEntityError(dict(error="ValidationError",
+                     serial="period - должно быть в пределах '1,2,3,4,5,6,0'.")
+               )
+            

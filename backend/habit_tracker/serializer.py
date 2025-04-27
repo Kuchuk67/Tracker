@@ -8,6 +8,7 @@ from habit_tracker.validators import (SimultaneousSelected,
                                         HabitNiceValid,
                                         PeriodValid,
                                       )
+from habit_tracker.task import TaskManager
 
 class HabitSerializer(ModelSerializer):
 
@@ -32,15 +33,8 @@ class HabitSerializer(ModelSerializer):
                       PeriodValid(),
                       )
         
-    '''def to_representation(self, instance):
-        """ Convert `username` to lowercase."""
-        print('********',instance)
-        ret = super().to_representation(instance)
-        ret['action'] = ret['action'] + " Ура !!"
-        print(ret)
-        return ret
-
-    def to_internal_value(self, data):
-        print('********', data)
-        valid = super().to_internal_value(data)
-        return valid'''
+    def create(self, validated_data):
+        instance = super().create(validated_data)
+        TaskManager(instance.pk, instance.period, instance.time_action).create()
+        return instance
+    

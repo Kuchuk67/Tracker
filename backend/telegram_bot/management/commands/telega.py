@@ -2,11 +2,13 @@ from telegram import Update
 from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler
 from django.core.management.base import BaseCommand
 from users.models import CustomUser
+from habit_tracker.models import Habit
 from aiogram.types import ReplyKeyboardRemove, ReplyKeyboardMarkup, KeyboardButton
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.ext import Updater, CommandHandler, CallbackQueryHandler
 from channels.db import database_sync_to_async
 from channels.db import database_sync_to_async
+
 
 class Command(BaseCommand):
 
@@ -16,7 +18,7 @@ class Command(BaseCommand):
         keyboard = [
             [InlineKeyboardButton("Задачи на сегодня", callback_data='1'),
              InlineKeyboardButton("Задачи на завтра", callback_data='2')],
-            [InlineKeyboardButton("TOP возможных задач", callback_data='3')],
+            [InlineKeyboardButton("10 возможных задач", callback_data='3')],
         ]
         return InlineKeyboardMarkup(keyboard)
 
@@ -29,24 +31,43 @@ class Command(BaseCommand):
         user.save()
         return user
 
+    @database_sync_to_async
+    def habits_now(self, update):
+        habits = Habit.objects.filter(
+            user__chat_id_telegram=update.effective_chat.id,
+            
+            )
+        habit_list = 'На сегодня запланировано:\n'
+        for habit in habits:
+            habit_list += f"{habit.time_action} -  {habit.action} \n"
+        return habit_list
+    
+
+    @database_sync_to_async
+    def habits_tomorrow(self, update):
+        habits = Habit.objects.filter(user__chat_id_telegram=update.effective_chat.id)
+        habit_list = 'На завтра запланировано:\n'
+        for habit in habits:
+            habit_list += f"{habit.time_action} -  {habit.action} \n"
+        return habit_list
+    
+    @database_sync_to_async
+    def habits_top(self, update):
+        habits = Habit.objects.filter(public=True).order_by('-id')
+        habit_list = '10 новых привычек: :\n'
+        for habit in habits:
+            habit_list += f"{habit.time_action} -  {habit.action} \n"
+        return habit_list
+
     def handle(self, *args, **kwargs):
-
-
         async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-
-
-
             await context.bot.send_message(chat_id=update.effective_chat.id,
                                            text="Привет! Я бот трекер-сарвиса 'Атомарные привычки'!"
                                            )
-            print("*********", update.effective_chat.username)
             # Тут надо найти в БД пользователя с ником телеграма
-
             try:
                 user = await self.add_id_chat(update)
             except Exception as e:
-                print("=====", e)
-
                 # НЕ найдено - пишем что надо зарегится на сервисе
                 await context.bot.send_message(chat_id=update.effective_chat.id,
                                                text="Не найден такой ник. Вам надо зарегится на сервисе "
@@ -55,8 +76,6 @@ class Command(BaseCommand):
                                                )
             else:
                 # найдено - записываем туда chat_id и пишем - ок
-
-                
                 await update.message.reply_text(
                     'Пожалуйста, выберите:', 
                     reply_markup=self.button_bot(update)
@@ -73,7 +92,17 @@ class Command(BaseCommand):
 
             # редактируем сообщение, тем самым кнопки
             # в чате заменятся на этот ответ.
-            await query.edit_message_text(text=f"Выбранный вариант: {variant}")
+            habit_list = ""
+            if variant == "1":
+                habit_list = await self.habits_now(update)
+
+            if variant == "2":
+                habit_list = await self.habits_tomorrow(update)  
+
+            if variant == "3":
+                habit_list = await self.habits_top(update)  
+ 
+            await query.edit_message_text(text=f"{habit_list}")
 
         # Токен телеграма
         application = ApplicationBuilder().token('7507147736:AAEOYdf3erBfJ-x7unESp431YfAgufAAQ50').build()
@@ -84,4 +113,4 @@ class Command(BaseCommand):
         application.add_handler(CallbackQueryHandler(button))
         # Зацикливание
         application.run_polling()
-
+    

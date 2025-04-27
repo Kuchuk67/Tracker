@@ -18,16 +18,18 @@ class Habit(models.Model):
                             verbose_name='место выполнения привычки',
                             help_text='место, в котором необходимо выполнять привычку',
                             )
-    """day_action = models.IntegerField(null=True,
-                            blank=True,
-                            verbose_name='день недели, когда необходимо выполнять привычку'
-                            ) """
+
     time_action = models.TimeField(default=None,
                             null=True,
                             blank=True,
                             verbose_name='время выполнения привычки',
                             help_text='время, когда необходимо выполнять привычку',
                             )
+    period = models.CharField(max_length=50,
+                            default='1,2,3,4,5,6,7',
+                            verbose_name='день недели, когда необходимо выполнять привычку',
+                            help_text='дни недели через запятую 1,2,3,4,5,6,7',
+                            )  
     action = models.CharField(max_length=50,
                             default=None,
                             null=True,
@@ -46,10 +48,6 @@ class Habit(models.Model):
                             related_name="to_related",
                             verbose_name="ссылка на полезную привычку"
                             )
-    period = models.IntegerField(null=True,
-                                blank=True,
-                                verbose_name='периодичность выполнения'
-                                ) 
     reward = models.CharField(max_length=50,
                             default=None,
                             null=True,

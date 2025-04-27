@@ -6,17 +6,22 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('habit_tracker', '0006_habit_day_action'),
+        ("habit_tracker", "0006_habit_day_action"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='habit',
-            name='day_action',
+            model_name="habit",
+            name="day_action",
         ),
         migrations.AlterField(
-            model_name='habit',
-            name='period',
-            field=models.CharField(blank=True, help_text='день недели Mon,Tue,Wed,Thu,Fri,Sat,Sun ', max_length=50, verbose_name='день недели, когда необходимо выполнять привычку'),
+            model_name="habit",
+            name="period",
+            field=models.CharField(
+                blank=True,
+                help_text="день недели Mon,Tue,Wed,Thu,Fri,Sat,Sun ",
+                max_length=50,
+                verbose_name="день недели, когда необходимо выполнять привычку",
+            ),
         ),
     ]

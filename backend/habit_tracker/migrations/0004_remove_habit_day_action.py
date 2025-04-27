@@ -6,12 +6,12 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('habit_tracker', '0003_rename_pablic_habit_public_alter_habit_related'),
+        ("habit_tracker", "0003_rename_pablic_habit_public_alter_habit_related"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='habit',
-            name='day_action',
+            model_name="habit",
+            name="day_action",
         ),
     ]

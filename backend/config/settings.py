@@ -10,11 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
-from pathlib import Path
-from django.core.management.utils import get_random_secret_key
 import os
-from dotenv import load_dotenv
 from datetime import timedelta
+from pathlib import Path
+
+from django.core.management.utils import get_random_secret_key
+from dotenv import load_dotenv
 
 # Загрузка переменных из .env-файла
 load_dotenv()
@@ -36,7 +37,7 @@ SECRET_KEY = get_random_secret_key()
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = 'django-insecure-gy8&&_9mq6-w1d=gec+fz^20qcdint9-$=vr10-^)wmyaj5e*2'
+# SECRET_KEY = 'django-insecure-gy8&&_9mq6-w1d=gec+fz^20qcdint9-$=vr10-^)wmyaj5e*2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -47,67 +48,65 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'corsheaders',
-    'users',
-    'habit_tracker',
-    'drf_spectacular',
-    'telegram_bot',
-    'django_celery_beat',
-
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "corsheaders",
+    "users",
+    "habit_tracker",
+    "drf_spectacular",
+    "telegram_bot",
+    "django_celery_beat",
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = 'config.urls'
+ROOT_URLCONF = "config.urls"
 
 AUTH_USER_MODEL = "users.CustomUser"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'config.wsgi.application'
-ASGI_APPLICATION = 'myproject.asgi.application'
+WSGI_APPLICATION = "config.wsgi.application"
+ASGI_APPLICATION = "myproject.asgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-'default': {
-'ENGINE': 'django.db.backends.postgresql_psycopg2',
-'NAME': SQL_DATABASE,
-'USER': SQL_USER,
-'PASSWORD': SQL_PASS,
-'HOST': SQL_HOST,
-'PORT': SQL_PORT,
-}
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": SQL_DATABASE,
+        "USER": SQL_USER,
+        "PASSWORD": SQL_PASS,
+        "HOST": SQL_HOST,
+        "PORT": SQL_PORT,
+    }
 }
 
 # Password validation
@@ -115,24 +114,24 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'ru-ru'
-TIME_ZONE = 'Europe/Moscow'
+LANGUAGE_CODE = "ru-ru"
+TIME_ZONE = "Europe/Moscow"
 
 USE_I18N = True
 
@@ -144,54 +143,52 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [ Path(__file__).resolve().parent.parent / 'static']
+STATICFILES_DIRS = [Path(__file__).resolve().parent.parent / "static"]
 
 # пути для хранения медиафайлов:
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'backend', 'media')
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "backend", "media")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 # OpenAPI
-#OAS_PATH = BASE_DIR.joinpath("oas.yml")
+# OAS_PATH = BASE_DIR.joinpath("oas.yml")
 API_VERSION = "api/v1/"
 
 # Rest framework
 _page_paginator = "rest_framework.pagination.PageNumberPagination"
 
 REST_FRAMEWORK = {
-    #"DEFAULT_PAGINATION_CLASS": 'rest_framework.pagination.PageNumberPagination',
+    # "DEFAULT_PAGINATION_CLASS": 'rest_framework.pagination.PageNumberPagination',
     #'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
     ],
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
-
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 5
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    "PAGE_SIZE": 5,
 }
 
 # Настройки срока действия токенов
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
 
 SPECTACULAR_SETTINGS = {
-    'SCHEMA_PATH_PREFIX': '/api/v[0-9]',
-    'TITLE': 'Habit Project API',
-    'DESCRIPTION': 'В рамках проекта реализована бэкенд-часть '
-                   'SPA веб-приложения - трекер полезных привычек.',
-    'VERSION': '1.0.0',
-    'SERVE_INCLUDE_SCHEMA': False,
+    "SCHEMA_PATH_PREFIX": "/api/v[0-9]",
+    "TITLE": "Habit Project API",
+    "DESCRIPTION": "В рамках проекта реализована бэкенд-часть "
+    "SPA веб-приложения - трекер полезных привычек.",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
     # OTHER SETTINGS
 }
 

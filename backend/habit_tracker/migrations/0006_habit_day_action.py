@@ -6,13 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('habit_tracker', '0005_alter_habit_time'),
+        ("habit_tracker", "0005_alter_habit_time"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='habit',
-            name='day_action',
-            field=models.DateField(blank=True, help_text='очередной день выполнения привычки', null=True, verbose_name='день, когда необходимо выполнять привычку'),
+            model_name="habit",
+            name="day_action",
+            field=models.DateField(
+                blank=True,
+                help_text="очередной день выполнения привычки",
+                null=True,
+                verbose_name="день, когда необходимо выполнять привычку",
+            ),
         ),
     ]

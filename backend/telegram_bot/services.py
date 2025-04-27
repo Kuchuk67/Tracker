@@ -1,10 +1,12 @@
 import requests
-from config.settings import BOT_TOKEN
 from requests import RequestException
+
+from config.settings import BOT_TOKEN
+
 
 def send_telegram_message(message, chat_id):
     """
-    Отправка сообщения в телеграм 
+    Отправка сообщения в телеграм
     """
     params = {"text": message, "chat_id": chat_id}
     try:

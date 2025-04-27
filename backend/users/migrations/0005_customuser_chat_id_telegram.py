@@ -6,13 +6,20 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('users', '0004_remove_customuser_api_telegram_and_more'),
+        ("users", "0004_remove_customuser_api_telegram_and_more"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='customuser',
-            name='chat_id_telegram',
-            field=models.CharField(blank=True, default=None, help_text='Telegram chat_id для бота рассылки', max_length=50, null=True, verbose_name='Telegram chat_id пользователя'),
+            model_name="customuser",
+            name="chat_id_telegram",
+            field=models.CharField(
+                blank=True,
+                default=None,
+                help_text="Telegram chat_id для бота рассылки",
+                max_length=50,
+                null=True,
+                verbose_name="Telegram chat_id пользователя",
+            ),
         ),
     ]

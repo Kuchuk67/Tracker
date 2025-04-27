@@ -6,13 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('habit_tracker', '0007_remove_habit_day_action_alter_habit_period'),
+        ("habit_tracker", "0007_remove_habit_day_action_alter_habit_period"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='habit',
-            name='period',
-            field=models.CharField(blank=True, help_text='дни недели через запятую 1,2,3,4,5,6,7', max_length=50, verbose_name='день недели, когда необходимо выполнять привычку'),
+            model_name="habit",
+            name="period",
+            field=models.CharField(
+                blank=True,
+                help_text="дни недели через запятую 1,2,3,4,5,6,7",
+                max_length=50,
+                verbose_name="день недели, когда необходимо выполнять привычку",
+            ),
         ),
     ]

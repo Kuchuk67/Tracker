@@ -6,18 +6,23 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('users', '0001_initial'),
+        ("users", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='customuser',
-            name='api_telegram',
-            field=models.CharField(default=None, help_text='Текущий статус данного ивента', max_length=50, verbose_name='статус ивента'),
+            model_name="customuser",
+            name="api_telegram",
+            field=models.CharField(
+                default=None,
+                help_text="Текущий статус данного ивента",
+                max_length=50,
+                verbose_name="статус ивента",
+            ),
         ),
         migrations.AlterField(
-            model_name='customuser',
-            name='is_active',
+            model_name="customuser",
+            name="is_active",
             field=models.BooleanField(default=False),
         ),
     ]

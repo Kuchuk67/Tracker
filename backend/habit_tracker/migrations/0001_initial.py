@@ -15,20 +15,113 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Habit',
+            name="Habit",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('place', models.CharField(blank=True, default=None, help_text='место, в котором необходимо выполнять привычку', max_length=50, null=True, verbose_name='место выполнения привычки')),
-                ('day_action', models.IntegerField(blank=True, null=True, verbose_name='день недели, когда необходимо выполнять привычку')),
-                ('time_action', models.TimeField(blank=True, default=None, help_text='время, когда необходимо выполнять привычку', null=True, verbose_name='время выполнения привычки')),
-                ('action', models.CharField(blank=True, default=None, help_text='действие, которое представляет собой привычка.', max_length=50, null=True, verbose_name='действие-привычка')),
-                ('nice', models.BooleanField(default=False, verbose_name='Признак приятной привычки')),
-                ('period', models.IntegerField(blank=True, null=True, verbose_name='периодичность выполнения')),
-                ('reward', models.CharField(blank=True, default=None, help_text='вознаграждение', max_length=50, null=True, verbose_name='чем пользователь должен себя вознаградить')),
-                ('time', models.IntegerField(blank=True, null=True, verbose_name='время на выполнение привычки')),
-                ('pablic', models.BooleanField(default=False, verbose_name='привычки можно публиковать в общий доступ')),
-                ('related', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='related', to=settings.AUTH_USER_MODEL, verbose_name='ссылка на полезную привычку')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='user', to=settings.AUTH_USER_MODEL, verbose_name='юзер создавший привычку')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "place",
+                    models.CharField(
+                        blank=True,
+                        default=None,
+                        help_text="место, в котором необходимо выполнять привычку",
+                        max_length=50,
+                        null=True,
+                        verbose_name="место выполнения привычки",
+                    ),
+                ),
+                (
+                    "day_action",
+                    models.IntegerField(
+                        blank=True,
+                        null=True,
+                        verbose_name="день недели, когда необходимо выполнять привычку",
+                    ),
+                ),
+                (
+                    "time_action",
+                    models.TimeField(
+                        blank=True,
+                        default=None,
+                        help_text="время, когда необходимо выполнять привычку",
+                        null=True,
+                        verbose_name="время выполнения привычки",
+                    ),
+                ),
+                (
+                    "action",
+                    models.CharField(
+                        blank=True,
+                        default=None,
+                        help_text="действие, которое представляет собой привычка.",
+                        max_length=50,
+                        null=True,
+                        verbose_name="действие-привычка",
+                    ),
+                ),
+                (
+                    "nice",
+                    models.BooleanField(
+                        default=False, verbose_name="Признак приятной привычки"
+                    ),
+                ),
+                (
+                    "period",
+                    models.IntegerField(
+                        blank=True, null=True, verbose_name="периодичность выполнения"
+                    ),
+                ),
+                (
+                    "reward",
+                    models.CharField(
+                        blank=True,
+                        default=None,
+                        help_text="вознаграждение",
+                        max_length=50,
+                        null=True,
+                        verbose_name="чем пользователь должен себя вознаградить",
+                    ),
+                ),
+                (
+                    "time",
+                    models.IntegerField(
+                        blank=True,
+                        null=True,
+                        verbose_name="время на выполнение привычки",
+                    ),
+                ),
+                (
+                    "pablic",
+                    models.BooleanField(
+                        default=False,
+                        verbose_name="привычки можно публиковать в общий доступ",
+                    ),
+                ),
+                (
+                    "related",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="related",
+                        to=settings.AUTH_USER_MODEL,
+                        verbose_name="ссылка на полезную привычку",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="user",
+                        to=settings.AUTH_USER_MODEL,
+                        verbose_name="юзер создавший привычку",
+                    ),
+                ),
             ],
         ),
     ]

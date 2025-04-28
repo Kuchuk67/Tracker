@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from channels.db import database_sync_to_async
 from django.core.management.base import BaseCommand
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
@@ -32,27 +34,45 @@ class Command(BaseCommand):
     def habits_now(self, update):
         habits = Habit.objects.filter(
             user__chat_id_telegram=update.effective_chat.id,
+            nice=False,
         )
+        dw = datetime.now().isoweekday()
+        if dw == 7:
+            dw = 0
         habit_list = "На сегодня запланировано:\n"
         for habit in habits:
-            habit_list += f"{habit.time_action} -  {habit.action} \n"
+            # отсеиваем по дням недели
+            if str(dw) in habit.period:
+                habit_list += f"{habit.time_action} -  {habit.action} \n"
         return habit_list
 
     @database_sync_to_async
     def habits_tomorrow(self, update):
         habits = Habit.objects.filter(
-            user__chat_id_telegram=update.effective_chat.id)
+            user__chat_id_telegram=update.effective_chat.id,
+            nice=False,
+        )
+        dw = datetime.now().isoweekday() + 1
+        if dw == 8:
+            dw = 1
+        if dw == 7:
+            dw = 0
         habit_list = "На завтра запланировано:\n"
         for habit in habits:
-            habit_list += f"{habit.time_action} -  {habit.action} \n"
+            # отсеиваем по дням недели
+            if str(dw) in habit.period:
+                habit_list += f"{habit.time_action} -  {habit.action} \n"
         return habit_list
 
     @database_sync_to_async
     def habits_top(self, update):
+        """ Вывести 10 последних публичных задач"""
         habits = Habit.objects.filter(public=True).order_by("-id")
-        habit_list = "10 новых привычек: :\n"
+        habit_list = "10 новых публичных привычек: :\n"
+        i = 1
         for habit in habits:
-            habit_list += f"{habit.time_action} -  {habit.action} \n"
+            habit_list += f"{i}.  {habit.action} \n"
+            i +=1
         return habit_list
 
     def handle(self, *args, **kwargs):
@@ -91,12 +111,13 @@ class Command(BaseCommand):
             # редактируем сообщение, тем самым кнопки
             # в чате заменятся на этот ответ.
             habit_list = ""
+            # Обработка - задачи на сегодня
             if variant == "1":
                 habit_list = await self.habits_now(update)
-
+            # Обработка - задачи на завтра
             if variant == "2":
                 habit_list = await self.habits_tomorrow(update)
-
+            # Обработка - 10 публичных задач
             if variant == "3":
                 habit_list = await self.habits_top(update)
 

@@ -23,6 +23,7 @@ channels = "^4.2.2"
 celery = "^5.5.2"
 django-celery-beat = "^2.8.0"
 redis = "^5.2.1"
+requests = "^2.32.3"
 
 
 [tool.poetry.group.link.dependencies]

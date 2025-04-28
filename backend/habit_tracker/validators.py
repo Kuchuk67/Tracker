@@ -70,8 +70,8 @@ class HabitNiceValid:
                 raise exceptions.UnprocessableEntityError(
                     dict(
                         error="ValidationError",
-                        serial="У 'приятной' не должно быть" / 
-                        " связанной или вознаграждения",
+                        serial="У 'приятной' не должно быть "
+                               "связанной или вознаграждения",
                     )
                 )
 
@@ -90,7 +90,8 @@ class PeriodValid:
             dict(error="ValidationError",
                  serial="period - должно быть в пределах 1-120 секунд.")
         )"""
-        day_of_week = value.get("period").split(",")
+
+        day_of_week = value.get("period", "1,2,3,4,5,6,0").split(",")
         for day in day_of_week:
             if not day.isdigit():
                 raise exceptions.UnprocessableEntityError(

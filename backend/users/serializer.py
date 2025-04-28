@@ -5,11 +5,7 @@ from users.models import CustomUser
 
 
 class UserSerializer(serializers.ModelSerializer):
-    # pay = SerializerMethodField()
-    """def get_pay(self, user):
-    return [{"дата":pay_item.data_at,
-             "сумма":pay_item.summa_pay
-             } for pay_item in Pay.objects.filter(user=user).order_by('id')]"""
+    password = serializers.CharField(write_only=True)
 
     class Meta:
         model = CustomUser
@@ -17,17 +13,16 @@ class UserSerializer(serializers.ModelSerializer):
             "id",
             "password",
             "email",
-            "api_telegram",
+            "nick_telegram",
         ]
-
 
 class UserCreateSerializer(serializers.ModelSerializer):
 
-    password = serializers.CharField(write_only=True)
+    password = serializers.CharField(write_only=True, required=True)
 
     class Meta:
         model = CustomUser
-        fields = ["email", "password"]
+        fields = ["email", "password", "nick_telegram"]
 
     def create(self, validated_data):
         validated_data["password"] = make_password(

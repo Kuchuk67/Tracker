@@ -33,6 +33,7 @@ class Habit(models.Model):
     period = models.CharField(
         max_length=50,
         default="1,2,3,4,5,6,7",
+        blank=True,
         verbose_name="день недели, когда необходимо выполнять привычку",
         help_text="дни недели через запятую 1,2,3,4,5,6,7",
     )

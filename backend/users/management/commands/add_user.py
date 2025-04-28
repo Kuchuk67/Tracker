@@ -22,8 +22,8 @@ class Command(BaseCommand):
         )
         user.set_password("12345")
         user.is_active = True
-        user.is_staff = True
-        user.is_superuser = True
+        user.is_staff = False
+        user.is_superuser = False
         user.save()
 
         # Создаем новую группу

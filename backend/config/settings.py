@@ -36,9 +36,6 @@ SECRET_KEY = get_random_secret_key()
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'django-insecure-gy8&&_9mq6-w1d=gec+fz^20qcdint9-$=vr10-^)wmyaj5e*2'
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -114,16 +111,17 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+    "NAME": 
+    "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+    "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
     },
     {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+    "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+    "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
 
@@ -163,16 +161,16 @@ API_VERSION = "api/v1/"
 _page_paginator = "rest_framework.pagination.PageNumberPagination"
 
 REST_FRAMEWORK = {
-    # "DEFAULT_PAGINATION_CLASS": 'rest_framework.pagination.PageNumberPagination',
-    #'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
     ],
-    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
-    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    "DEFAULT_SCHEMA_CLASS": 
+        "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_PAGINATION_CLASS": 
+        "rest_framework.pagination.LimitOffsetPagination",
     "PAGE_SIZE": 5,
 }
 
@@ -218,8 +216,7 @@ CACHES = {
 CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
 
 # URL-адрес брокера сообщений
-CELERY_BROKER_URL = "redis://127.0.0.1:6380"  # Например, Redis, который по умолчанию работает на порту 6379
-
+CELERY_BROKER_URL = "redis://127.0.0.1:6380"  
 # URL-адрес брокера результатов, также Redis
 CELERY_RESULT_BACKEND = "redis://127.0.0.1:6380"
 

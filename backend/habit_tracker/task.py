@@ -1,13 +1,6 @@
-import json
 from datetime import datetime
-from typing import ClassVar
-
-from celery.local import Proxy
-from django.conf import settings
-from django.utils import timezone
-from django_celery_beat.models import (ClockedSchedule, CrontabSchedule,
-                                       IntervalSchedule, PeriodicTask)
-
+from django_celery_beat.models import (CrontabSchedule,
+                                       PeriodicTask)
 from config.celery import app
 from habit_tracker.models import Habit
 from telegram_bot.services import send_telegram_message
@@ -16,13 +9,10 @@ from telegram_bot.services import send_telegram_message
 class TaskManager:
     """
     Вызывается c созданием объекта
-    Вызывает задачу по времени clocked_time
-    для переданного ID
+    Вызывает задачу по времени chronetime
     Получает данные:
     id объекта: int
-    номер для идентификации задачи: int
     дата-тайм начала (может null),
-    дата-тайм финиша (может null)
     """
 
     def __init__(
@@ -43,7 +33,6 @@ class TaskManager:
         """
         Назначаем шедулер или берем старый если есть
         """
-        print("************", self.time_start.minute, self.time_start.hour, self.period)
         if self.time_start:
             schedule, _ = CrontabSchedule._default_manager.get_or_create(
                 minute=self.time_start.minute,
@@ -102,8 +91,13 @@ def task_habit(id_habit):
     id_habit = int(id_habit)
     habit = Habit.objects.get(pk=id_habit)
     message = (
-        f"Напоминание: Выполните привычку '{habit.action}' в локации '{habit.place}' "
+        f"Напоминание: Выполните привычку '{habit.action}'"
+        f" в локации '{habit.place}' "
         f"время выполнения: {habit.time}. "
-        f"Вознаграждение: {habit.reward if habit.reward else habit.related.action}."
+        f"Вознаграждение: {
+            habit.reward 
+            if habit.reward
+                else habit.related.action
+        }."
     )
     send_telegram_message(message, habit.user.chat_id_telegram)

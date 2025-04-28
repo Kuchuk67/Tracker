@@ -1,5 +1,4 @@
-from rest_framework.serializers import ModelSerializer, SerializerMethodField
-
+from rest_framework.serializers import ModelSerializer
 from habit_tracker.models import Habit
 from habit_tracker.task import TaskManager
 from habit_tracker.validators import (HabitNiceValid, PeriodValid, SignNice,
@@ -32,5 +31,7 @@ class HabitSerializer(ModelSerializer):
 
     def create(self, validated_data):
         instance = super().create(validated_data)
-        TaskManager(instance.pk, instance.period, instance.time_action).create()
+        TaskManager(instance.pk,
+                    instance.period,
+                    instance.time_action).create()
         return instance

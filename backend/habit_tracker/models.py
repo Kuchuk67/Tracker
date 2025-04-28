@@ -44,7 +44,9 @@ class Habit(models.Model):
         verbose_name="действие-привычка",
         help_text="действие, которое представляет собой привычка.",
     )
-    nice = models.BooleanField(default=False, verbose_name="Признак приятной привычки")
+    nice = models.BooleanField(
+        default=False, 
+        verbose_name="Признак приятной привычки")
     related = models.ForeignKey(
         "self",
         default=None,
@@ -63,10 +65,13 @@ class Habit(models.Model):
         help_text="вознаграждение",
     )
     time = models.IntegerField(
-        null=True, blank=True, verbose_name="время на выполнение привычки в секундах"
+        null=True, 
+        blank=True, 
+        verbose_name="время на выполнение привычки в секундах"
     )
     public = models.BooleanField(
-        default=False, verbose_name="привычки можно публиковать в общий доступ"
+        default=False,
+        verbose_name="привычки можно публиковать в общий доступ"
     )
 
     def __str__(self):

@@ -1,11 +1,8 @@
-from aiogram.types import (KeyboardButton, ReplyKeyboardMarkup,
-                           ReplyKeyboardRemove)
 from channels.db import database_sync_to_async
 from django.core.management.base import BaseCommand
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.ext import (ApplicationBuilder, CallbackQueryHandler,
-                          CommandHandler, ContextTypes, Updater)
-
+                          CommandHandler, ContextTypes)
 from habit_tracker.models import Habit
 from users.models import CustomUser
 
@@ -25,7 +22,8 @@ class Command(BaseCommand):
 
     @database_sync_to_async
     def add_id_chat(self, update):
-        user = CustomUser.objects.get(nick_telegram=update.effective_chat.username)
+        user = CustomUser.objects.get(
+            nick_telegram=update.effective_chat.username)
         user.chat_id_telegram = update.effective_chat.id
         user.save()
         return user
@@ -42,7 +40,8 @@ class Command(BaseCommand):
 
     @database_sync_to_async
     def habits_tomorrow(self, update):
-        habits = Habit.objects.filter(user__chat_id_telegram=update.effective_chat.id)
+        habits = Habit.objects.filter(
+            user__chat_id_telegram=update.effective_chat.id)
         habit_list = "На завтра запланировано:\n"
         for habit in habits:
             habit_list += f"{habit.time_action} -  {habit.action} \n"
@@ -64,8 +63,8 @@ class Command(BaseCommand):
             )
             # Тут надо найти в БД пользователя с ником телеграма
             try:
-                user = await self.add_id_chat(update)
-            except Exception as e:
+                await self.add_id_chat(update)
+            except Exception:
                 # НЕ найдено - пишем что надо зарегится на сервисе
                 await context.bot.send_message(
                     chat_id=update.effective_chat.id,
@@ -76,7 +75,8 @@ class Command(BaseCommand):
             else:
                 # найдено - записываем туда chat_id и пишем - ок
                 await update.message.reply_text(
-                    "Пожалуйста, выберите:", reply_markup=self.button_bot(update)
+                    "Пожалуйста, выберите:",
+                    reply_markup=self.button_bot(update)
                 )
 
         async def button(update, _):

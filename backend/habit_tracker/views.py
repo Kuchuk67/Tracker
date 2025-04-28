@@ -1,8 +1,5 @@
-from django.shortcuts import render
 from rest_framework.generics import ListAPIView
-from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
-
 from habit_tracker.models import Habit
 from habit_tracker.serializer import HabitSerializer
 

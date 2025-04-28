@@ -1,8 +1,5 @@
-from django.contrib import admin
 from django.urls import include, path
 from rest_framework import routers
-
-from config.settings import API_VERSION
 from habit_tracker.views import HabitListViews, HabitViewsSet
 
 router = routers.SimpleRouter(

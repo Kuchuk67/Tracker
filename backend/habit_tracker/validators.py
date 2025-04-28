@@ -1,7 +1,4 @@
-from urllib.parse import urlparse
-
 from habit_tracker import exceptions
-from habit_tracker.models import Habit
 
 
 class SimultaneousSelected:
@@ -50,7 +47,7 @@ class SignNice:
     def __call__(self, value, serializer_field):
         related = value.get("related")
         if related:
-            if related.nice == False:
+            if related.nice:
                 raise exceptions.UnprocessableEntityError(
                     dict(
                         error="ValidationError",
@@ -73,7 +70,8 @@ class HabitNiceValid:
                 raise exceptions.UnprocessableEntityError(
                     dict(
                         error="ValidationError",
-                        serial="У 'приятной' не должно быть связанной или вознаграждения",
+                        serial="У 'приятной' не должно быть" / 
+                        " связанной или вознаграждения",
                     )
                 )
 
@@ -98,13 +96,13 @@ class PeriodValid:
                 raise exceptions.UnprocessableEntityError(
                     dict(
                         error="ValidationError",
-                        serial="period - должно быть в пределах '1,2,3,4,5,6,0'.",
+                        serial="period должно быть в пределе '1,2,3,4,5,6,0'.",
                     )
                 )
             if int(day) > 6:
                 raise exceptions.UnprocessableEntityError(
                     dict(
                         error="ValidationError",
-                        serial="period - должно быть в пределах '1,2,3,4,5,6,0'.",
+                        serial="period должно быть в пределе '1,2,3,4,5,6,0'.",
                     )
                 )

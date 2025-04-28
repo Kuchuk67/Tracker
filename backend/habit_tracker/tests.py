@@ -1,4 +1,3 @@
-from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
 from rest_framework import status
@@ -7,13 +6,12 @@ from rest_framework.test import APIClient
 from habit_tracker.models import Habit
 from users.models import CustomUser
 
-CustomUser = get_user_model()
-
 
 class HabitTestCase(TestCase):
     """
     Тесты endpoint, permissions, validators
     """
+
     def setUp(self):
         self.client = APIClient()
 
@@ -27,7 +25,6 @@ class HabitTestCase(TestCase):
         )
         self.admin_user.set_password("123456789")
         self.admin_user.save()
-
 
         self.user_1 = CustomUser.objects.create(
             email="user1@user.com",
@@ -80,8 +77,6 @@ class HabitTestCase(TestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data["results"]), 2)
 
-
-
     def test_habit_get(self):
         response = self.client.get(reverse("habit:habit-list"))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -89,27 +84,27 @@ class HabitTestCase(TestCase):
 
     def test_habit_post(self):
         fixture_data = dict({"place": "дом",
-                         "time_action": "08:00:00",
-                         "action": "действие",
-                         "nice": True,
-                         "related": None,
-                         "reward": None,
-                         "time": 1,
-                         "public": False,
-                         "user": 1,
-                         "period": "1,2,4"
-                         })
+                             "time_action": "08:00:00",
+                             "action": "действие",
+                             "nice": True,
+                             "related": None,
+                             "reward": None,
+                             "time": 1,
+                             "public": False,
+                             "user": 1,
+                             "period": "1,2,4"
+                             })
         data_response = dict({'place': 'дом',
-                     'time_action': '08:00:00',
-                     'action': 'действие',
-                     'nice': True,
-                     'related': None,
-                     'period': '1,2,4',
-                     'reward': None,
-                     'time': 1,
-                     'public': False,
-                     'user': self.user_1.pk}
-)
+                              'time_action': '08:00:00',
+                              'action': 'действие',
+                              'nice': True,
+                              'related': None,
+                              'period': '1,2,4',
+                              'reward': None,
+                              'time': 1,
+                              'public': False,
+                              'user': self.user_1.pk
+                              })
         url = "/api/v1/habit"
         response = self.client.post(
             path=url,

@@ -16,10 +16,10 @@ class TaskManager:
     """
 
     def __init__(
-        self,
-        habit_pk: int,
-        period: str,
-        time_start: datetime,
+            self,
+            habit_pk: int,
+            period: str,
+            time_start: datetime,
     ):
         self.habit_pk = habit_pk
         self.period = period
@@ -94,10 +94,7 @@ def task_habit(id_habit):
         f"Напоминание: Выполните привычку '{habit.action}'"
         f" в локации '{habit.place}' "
         f"время выполнения: {habit.time}. "
-        f"Вознаграждение: {
-            habit.reward 
-            if habit.reward
-                else habit.related.action
-        }."
+        f"Вознаграждение: "
+        f"{habit.reward if habit.reward else habit.related.action}."
     )
     send_telegram_message(message, habit.user.chat_id_telegram)

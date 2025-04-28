@@ -41,7 +41,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -111,17 +110,17 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-    "NAME": 
-    "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+        "NAME":
+            "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
-    "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
     },
     {
-    "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
-    "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
 
@@ -152,7 +151,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "backend", "media")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-
 # OpenAPI
 # OAS_PATH = BASE_DIR.joinpath("oas.yml")
 API_VERSION = "api/v1/"
@@ -167,11 +165,12 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
     ],
-    "DEFAULT_SCHEMA_CLASS": 
+    "DEFAULT_SCHEMA_CLASS":
         "drf_spectacular.openapi.AutoSchema",
-    "DEFAULT_PAGINATION_CLASS": 
+    "DEFAULT_PAGINATION_CLASS":
         "rest_framework.pagination.LimitOffsetPagination",
-    "PAGE_SIZE": 5,
+    "PAGE_SIZE":
+        5,
 }
 
 # Настройки срока действия токенов
@@ -184,7 +183,7 @@ SPECTACULAR_SETTINGS = {
     "SCHEMA_PATH_PREFIX": "/api/v[0-9]",
     "TITLE": "Habit Project API",
     "DESCRIPTION": "В рамках проекта реализована бэкенд-часть "
-    "SPA веб-приложения - трекер полезных привычек.",
+                   "SPA веб-приложения - трекер полезных привычек.",
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,
     # OTHER SETTINGS
@@ -210,7 +209,6 @@ CACHES = {
         "LOCATION": "redis://127.0.0.1:6379",
     }
 }
-
 
 # Настройки для Celery
 CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"

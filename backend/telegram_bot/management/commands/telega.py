@@ -72,7 +72,7 @@ class Command(BaseCommand):
         i = 1
         for habit in habits:
             habit_list += f"{i}.  {habit.action} \n"
-            i +=1
+            i += 1
         return habit_list
 
     def handle(self, *args, **kwargs):

@@ -16,8 +16,8 @@ class UserSerializer(serializers.ModelSerializer):
             "nick_telegram",
         ]
 
-class UserCreateSerializer(serializers.ModelSerializer):
 
+class UserCreateSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=True)
 
     class Meta:

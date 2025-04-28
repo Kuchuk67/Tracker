@@ -20,8 +20,8 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path(API_VERSION + "schema/", 
-         SpectacularAPIView.as_view(), 
+    path(API_VERSION + "schema/",
+         SpectacularAPIView.as_view(),
          name="schema"),
     path(
         API_VERSION + "swagger/",
@@ -29,9 +29,11 @@ urlpatterns = [
         name="swagger-ui",
     ),
     # habit_tracker
-    path(API_VERSION, include("habit_tracker.urls", 
-                              namespace="habit")),
+    path(API_VERSION, include("habit_tracker.urls",
+                              namespace="habit"
+                              )),
     # users
-    path(API_VERSION, include("users.urls", 
-                              namespace="users")),
+    path(API_VERSION, include("users.urls",
+                              namespace="users"
+                              )),
 ]

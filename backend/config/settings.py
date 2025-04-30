@@ -29,7 +29,7 @@ SQL_PORT = os.getenv("SQL_PORT")
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 SECRET_KEY = get_random_secret_key()
 
@@ -134,7 +134,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/

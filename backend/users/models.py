@@ -6,7 +6,6 @@ from django.db import models
 class CustomUser(AbstractUser):
     username = None
     email = models.EmailField(unique=True)
-    is_active = models.BooleanField(default=False)
     nick_telegram = models.CharField(
         max_length=50,
         default=None,

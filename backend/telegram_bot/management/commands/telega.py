@@ -7,7 +7,7 @@ from telegram.ext import (ApplicationBuilder, CallbackQueryHandler,
                           CommandHandler, ContextTypes)
 from habit_tracker.models import Habit
 from users.models import CustomUser
-
+from config.settings import BOT_TOKEN
 
 class Command(BaseCommand):
 
@@ -126,7 +126,7 @@ class Command(BaseCommand):
         # Токен телеграма
         application = (
             ApplicationBuilder()
-            .token("7507147736:AAEOYdf3erBfJ-x7unESp431YfAgufAAQ50")
+            .token(BOT_TOKEN)
             .build()
         )
         # Добавить обработчик /start

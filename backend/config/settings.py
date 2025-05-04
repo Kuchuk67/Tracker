@@ -203,7 +203,7 @@ CORS_ALLOW_ALL_ORIGINS = False
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379",
+        "LOCATION": "redis://127.0.0.1:6380",
     }
 }
 
@@ -211,9 +211,9 @@ CACHES = {
 CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
 
 # URL-адрес брокера сообщений
-CELERY_BROKER_URL = "redis://127.0.0.1:6379"
+CELERY_BROKER_URL = "redis://redis:6380"
 # URL-адрес брокера результатов, также Redis
-CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379"
+CELERY_RESULT_BACKEND = "redis://redis:6380"
 
 # Часовой пояс для работы Celery
 CELERY_TIMEZONE = "Europe/Moscow"

@@ -5,26 +5,30 @@ from users.models import CustomUser
 class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
-        CustomUser.objects.all().delete()
+        # CustomUser.objects.all().delete()
 
         # Создаем суперпользователя
-        user = CustomUser.objects.create(
+        user = CustomUser.objects.get(
             email="admin@mail.ru",
         )
-        user.set_password("12345")
-        user.is_active = True
-        user.is_staff = True
-        user.is_superuser = True
-        user.save()
+        if not user:
+            user = CustomUser.objects.create(
+                email="admin@mail.ru",
+            )
+            user.set_password("12345")
+            user.is_active = True
+            user.is_staff = True
+            user.is_superuser = True
+            user.save()
 
-        user = CustomUser.objects.create(
+        """user = CustomUser.objects.create(
             email="user@mail.ru",
         )
         user.set_password("12345")
         user.is_active = True
         user.is_staff = False
         user.is_superuser = False
-        user.save()
+        user.save()"""
 
         # Создаем новую группу
         # new_group, created = Group.objects.get_or_create(name="Модератор")

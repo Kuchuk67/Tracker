@@ -70,7 +70,7 @@ class TaskManager:
                 one_off=False,
                 name=name_task,
                 task=task,
-                start_time=datetime.now(),
+                #start_time=datetime.now(),
                 args=[self.habit_pk],
             )
         else:

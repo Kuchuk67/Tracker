@@ -1,9 +1,7 @@
 from datetime import datetime
 from django_celery_beat.models import (CrontabSchedule,
                                        PeriodicTask)
-from config.celery import app
-from habit_tracker.models import Habit
-from telegram_bot.services import send_telegram_message
+
 
 
 class TaskManager:
@@ -63,7 +61,7 @@ class TaskManager:
         # если есть шедулера
         # ставим задачу на установку статуса на process
         # и задачу на установку статуса завершения
-        task = "habit_tracker.task.task_habit"
+        task = "habit_tracker.tasks.task_habit"
         name_task = f"Task_{self.habit_pk}"
         instance = PeriodicTask._default_manager.filter(name=name_task).first()
         if not instance:
@@ -72,7 +70,7 @@ class TaskManager:
                 one_off=False,
                 name=name_task,
                 task=task,
-                start_time=datetime.now(),
+                #start_time=datetime.now(),
                 args=[self.habit_pk],
             )
         else:
@@ -84,17 +82,4 @@ class TaskManager:
         self._task_update_status_event(kwargs)
 
 
-@app.task()
-def task_habit(id_habit):
-    print("++++++++++++", id_habit)
-    # send_telegram_message("cccccca", )
-    id_habit = int(id_habit)
-    habit = Habit.objects.get(pk=id_habit)
-    message = (
-        f"Напоминание: Выполните привычку '{habit.action}'"
-        f" в локации '{habit.place}' "
-        f"время выполнения: {habit.time}. "
-        f"Вознаграждение: "
-        f"{habit.reward if habit.reward else habit.related.action}."
-    )
-    send_telegram_message(message, habit.user.chat_id_telegram)
+

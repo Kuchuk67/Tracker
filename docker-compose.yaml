@@ -1,0 +1,75 @@
+services:
+  django:
+    restart: always
+    build:
+      context: .
+      dockerfile: ./backend/docker/django/Dockerfile
+    command: 
+      /start
+    ports:
+      - 8000:8000
+    env_file:
+      - ./backend/.env
+    networks:
+      - backend
+    depends_on:
+      - db
+
+  db:
+    restart: always
+    image: postgres:16.3-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    hostname: db
+    networks:
+      - backend
+    env_file:
+      - ./backend/.env
+
+  redis:
+    image: redis
+    hostname: redis
+    restart: unless-stopped
+    command: redis-server --port 6380
+    ports:
+      - 6380:6380
+    volumes:
+      - ./redisdata:/data
+    networks:
+       - backend
+      
+  celery_worker:
+    build:
+      dockerfile: ./backend/docker/django/Dockerfile
+    command: /start_celeryworker
+    networks:
+      - backend
+    volumes:
+      - celery:/celery
+    depends_on:
+      - redis
+      - db
+      - django
+
+  celery_beat:
+    build:
+      dockerfile: ./backend/docker/django/Dockerfile
+    command: /start_celerybeat
+    volumes:
+      - celery:/celery
+    networks:
+      - backend
+    depends_on:
+      - redis
+      - db
+      - django
+
+volumes:
+  postgres_data:
+  celery:
+
+networks:
+  backend:
+    driver: bridge
+  frontend:
+    driver: bridge

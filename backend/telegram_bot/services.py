@@ -8,7 +8,7 @@ def send_telegram_message(message, chat_id):
     """
     Отправка сообщения в телеграм
     """
-    params = {"text": message, "chat_id": chat_id}
+    params = {"text": message, "chat_id": chat_id}  # chat_id=1385214291
     try:
         response = requests.get(
             f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage",

@@ -25,6 +25,18 @@ COPY ./backend/docker/celery/beat/start /start_celerybeat
 RUN sed -i 's/\r$//g' /start_celerybeat
 RUN chmod +x /start_celerybeat
 
-EXPOSE 8000
+#EXPOSE 8000
+
+# Используем официальный образ Nginx
+FROM nginx:latest
+
+# Копируем файл конфигурации Nginx в контейнер
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Копируем статические файлы веб-сайта в директорию для обслуживания
+COPY html/ /usr/share/nginx/html/
+
+# Открываем порт 80 для HTTP-трафика
+EXPOSE 80
 
 #CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

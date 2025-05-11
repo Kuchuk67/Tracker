@@ -21,11 +21,11 @@ jobs:
         poetry install
 
     - name: Run migrations
-      run: 
+      run: |
         cd backend
         python manage.py migrate
 
     - name: Run tests
-      run: 
+      run: |
         cd backend
         python manage.py test

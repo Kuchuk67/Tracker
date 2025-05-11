@@ -16,13 +16,14 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        cd backend
         pip install poetry
+        cd backend
         poetry install
 
     - name: Run migrations
       run: |
         cd backend
+        django -V
         python manage.py migrate
 
     - name: Run tests

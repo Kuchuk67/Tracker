@@ -1,0 +1,46 @@
+name: Django CI
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install poetry
+        cd backend
+        poetry install
+
+    - name: Cache venv created by poetry (configured to be in '.venv')
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pypoetry
+        key: venv-${{ runner.os }}-${{ hashFiles('poetry.lock') }}
+      
+
+    - name: Run migrations
+      env:
+        DBENGINE: django.db.backends.sqlite3
+        POSTGRES_DB: ":memory:"
+      run: |
+        cd backend
+        source $(poetry env info --path)/bin/activate
+        python manage.py migrate
+
+    - name: Run tests
+      env:
+        DBENGINE: django.db.backends.sqlite3
+        POSTGRES_DB: ":memory:"
+      run: |
+        cd backend
+        source $(poetry env info --path)/bin/activate
+        python manage.py test

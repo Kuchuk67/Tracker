@@ -97,15 +97,8 @@ ASGI_APPLICATION = "myproject.asgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-if 'test' in sys.argv:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': ':memory:',
-        }
-    }
-else:
-    DATABASES = {
+
+DATABASES = {
     "default": {
         "ENGINE": DBENGINE,
         "NAME": SQL_DATABASE,
@@ -114,7 +107,7 @@ else:
         "HOST": SQL_HOST,
         "PORT": SQL_PORT,
     }
-    }
+}
 
 
 

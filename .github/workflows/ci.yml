@@ -29,6 +29,8 @@ jobs:
         python manage.py migrate
 
     - name: Run tests
+      env:
+        DBENGINE: django.db.backends.sqlite3
       run: |
         cd backend
         source $(poetry env info --path)/bin/activate

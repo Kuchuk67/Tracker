@@ -16,6 +16,7 @@ from pathlib import Path
 
 from django.core.management.utils import get_random_secret_key
 from dotenv import load_dotenv
+import sys
 
 # Загрузка переменных из .env-файла
 load_dotenv()
@@ -94,7 +95,15 @@ ASGI_APPLICATION = "myproject.asgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
+if 'test' in sys.argv:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': ':memory:',
+        }
+    }
+else:
+    DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
         "NAME": SQL_DATABASE,
@@ -103,7 +112,9 @@ DATABASES = {
         "HOST": SQL_HOST,
         "PORT": SQL_PORT,
     }
-}
+    }
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators

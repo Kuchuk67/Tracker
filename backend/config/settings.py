@@ -27,6 +27,8 @@ SQL_USER = os.getenv("POSTGRES_USER")
 SQL_PASS = os.getenv("POSTGRES_PASSWORD")
 SQL_PORT = os.getenv("POSTGRES_PORT")
 
+DBENGINE = os.getenv("DBENGINE")
+
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -105,7 +107,7 @@ if 'test' in sys.argv:
 else:
     DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "ENGINE": DBENGINE,
         "NAME": SQL_DATABASE,
         "USER": SQL_USER,
         "PASSWORD": SQL_PASS,

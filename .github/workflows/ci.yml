@@ -21,6 +21,8 @@ jobs:
         poetry install
 
     - name: Run migrations
+      env:
+        DBENGINE: django.db.backends.sqlite3
       run: |
         cd backend
         source $(poetry env info --path)/bin/activate

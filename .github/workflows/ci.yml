@@ -22,9 +22,12 @@ jobs:
 
     - name: Run migrations
       run: |
-        python backend/manage.py migrate
+        cd backend
+        source $(poetry env info --path)/bin/activate
+        python manage.py migrate
 
     - name: Run tests
       run: |
         cd backend
+        source $(poetry env info --path)/bin/activate
         python manage.py test

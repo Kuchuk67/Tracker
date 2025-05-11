@@ -23,7 +23,7 @@ jobs:
     - name: Cache venv created by poetry (configured to be in '.venv')
       uses: actions/cache@v3
       with:
-        path: backend/.venv
+        path: ~/.cache/pypoetry
         key: venv-${{ runner.os }}-${{ hashFiles('poetry.lock') }}
       
 

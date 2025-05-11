@@ -1,7 +1,6 @@
 services:
   nginx:
-
-    build: .
+    image: nginx:latest
     ports:
       - 80:80
     volumes:
@@ -14,8 +13,6 @@ services:
     image: postgres:16.3-alpine
     volumes:
       - postgres_data:/var/lib/postgresql/data/
-    #ports:
-    #  - 5432:5432
     hostname: db
     networks:
       - backend
@@ -49,6 +46,37 @@ services:
       - backend
     depends_on: 
       - db
+
+  celery_worker:
+    #image: celery_worker
+    build:
+      context: .
+      dockerfile: ./backend/docker/django/Dockerfile
+    command: /start_celeryworker
+    networks:
+      - backend
+    volumes:
+      - celery:/celery
+    depends_on:
+      - redis
+      - db
+      - django
+
+  celery_beat:
+    build:
+      context: .
+      dockerfile: ./backend/docker/django/Dockerfile
+    command: /start_celerybeat
+    volumes:
+      - celery:/celery
+    networks:
+      - backend
+    depends_on:
+      - redis
+      - db
+      - django
+
+      
 volumes:
   postgres_data:
   celery:

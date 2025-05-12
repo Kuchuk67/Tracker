@@ -21,7 +21,7 @@ jobs:
         poetry install
 
     - name: Cache venv created by poetry (configured to be in '.venv')
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pypoetry
         key: venv-${{ runner.os }}-${{ hashFiles('poetry.lock') }}
@@ -92,4 +92,4 @@ jobs:
         ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
           sudo systemctl restart myapp.service
         EOF
-        
+

@@ -56,12 +56,12 @@ jobs:
 
     - name: Test
       run: |
-        ssh -l user_n 158.160.18.171
+        ssh -l user_n 158.160.28.176
         
     - name: Copy project files to server
       run: |
         
-        rsync -avz --exclude '__pycache__' . user_n@158.160.18.171:22/Tracker
+        rsync -avz --exclude '__pycache__' . user_n@158.160.28.176:/Tracker
 
     - name: Install dependencies on server
       run: |

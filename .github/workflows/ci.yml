@@ -58,7 +58,6 @@ jobs:
       run: |
         ssh -o StrictHostKeyChecking=no -l ${{ secrets.SSH_USER }} ${{ secrets.SERVER_IP }} << 'EOF'
           cd ${{ secrets.DEPLOY_DIR }}
-
         
     - name: Copy project files to server
       run: |

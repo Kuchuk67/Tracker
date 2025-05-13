@@ -61,8 +61,8 @@ jobs:
         
     - name: Copy project files to server
       run: |
-        dir << 'EOF'
-        rsync -avz . ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }}:/${{ secrets.DEPLOY_DIR }}/
+        
+        rsync -avz . ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }}:/
 
     - name: Install dependencies on server
       run: |

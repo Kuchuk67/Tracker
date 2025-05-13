@@ -56,8 +56,8 @@ jobs:
 
     - name: Copy project files to server
       run: |
-        echo ${{ SSH_USER }}@${{ SERVER_IP }}:/${{ DEPLOY_DIR }}
-        rsync -avz --exclude '__pycache__' . ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }}:/${{ secrets.DEPLOY_DIR }}
+        
+        rsync -avz --exclude '__pycache__' . user_n@158.160.18.171:/Tracker
 
     - name: Install dependencies on server
       run: |

@@ -57,7 +57,7 @@ jobs:
     - name: Copy project files to server
       run: |
         
-        rsync -avz --exclude '__pycache__' . user_n@158.160.18.171:/Tracker
+        rsync -avz --exclude '__pycache__' . user_n@158.160.18.171:22/Tracker
 
     - name: Install dependencies on server
       run: |

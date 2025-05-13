@@ -58,7 +58,6 @@ jobs:
       run: |
         ssh -l user_n 158.160.18.171
         
-
     - name: Copy project files to server
       run: |
         

@@ -56,7 +56,7 @@ jobs:
 
     - name: Test
       run: |
-        ssh -o StrictHostKeyChecking=no -l user_n 158.160.28.176 << 'EOF'
+        ssh -o StrictHostKeyChecking=no -l ${{ secrets.SSH_USER }} ${{ secrets.SERVER_IP }} << 'EOF'
           cd ${{ secrets.DEPLOY_DIR }}
 
         

@@ -56,7 +56,9 @@ jobs:
 
     - name: Test
       run: |
-        ssh -l user_n 158.160.28.176
+        ssh -o StrictHostKeyChecking=no -l user_n 158.160.28.176 << 'EOF'
+          cd ${{ secrets.DEPLOY_DIR }}
+
         
     - name: Copy project files to server
       run: |

@@ -21,7 +21,7 @@ jobs:
       run: |
         
         ssh ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} "mkdir -p ~/tracker"
-        rsync -avz . ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }}:~/tracker/
+        rsync -avz -e "ssh -o StrictHostKeyChecking=no" ./ ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }}:~/tracker/
 
     - name: IDIR
       run: |

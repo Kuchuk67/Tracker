@@ -1,9 +1,5 @@
-name: Django CI
-on: [push, pull_request]
-jobs:
-  test:
+test:
     runs-on: ubuntu-latest
-
     steps:
     - name: Check out code
       uses: actions/checkout@v3
@@ -21,7 +17,7 @@ jobs:
         poetry install
 
     - name: Cache venv created by poetry (configured to be in '.venv')
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pypoetry
         key: venv-${{ runner.os }}-${{ hashFiles('poetry.lock') }}
@@ -44,3 +40,6 @@ jobs:
         cd backend
         source $(poetry env info --path)/bin/activate
         python manage.py test
+
+
+needs: test

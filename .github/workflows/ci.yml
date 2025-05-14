@@ -20,6 +20,7 @@ jobs:
     - name: Copy project files to server
       run: |
         
+        ssh ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} "mkdir -p ~/tracker"
         rsync -avz . ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }}:~/tracker/
 
     - name: IDIR

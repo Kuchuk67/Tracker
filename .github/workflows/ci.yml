@@ -23,12 +23,8 @@ jobs:
         ssh ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} "mkdir -p ~/tracker"
         rsync -avz -e "ssh -o StrictHostKeyChecking=no" ./ ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }}:~/tracker/
 
-    - name: IDIR
-      run: |
-        ssh -o StrictHostKeyChecking=no user_n@158.160.28.176 << 'EOF'
-        cd tracker
-        git fetch 
-        git svich develop 
+    
+        
         
 
     - name: Install dependencies on server

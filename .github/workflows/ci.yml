@@ -25,7 +25,7 @@ jobs:
     - name: Install dependencies on server
       run: |
         ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }} ${{ secrets.SERVER_IP }} << 'EOF'
-          cd ${{ secrets.DEPLOY_DIR }}
+          cd tracker
           pip install poetry
           cd backend
           source $(poetry env info --path)/bin/activate

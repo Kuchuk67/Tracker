@@ -16,7 +16,7 @@ from pathlib import Path
 
 from django.core.management.utils import get_random_secret_key
 from dotenv import load_dotenv
-import sys
+# import sys
 
 # Загрузка переменных из .env-файла
 load_dotenv()
@@ -94,8 +94,7 @@ TEMPLATES = [
 WSGI_APPLICATION = "config.wsgi.application"
 ASGI_APPLICATION = "myproject.asgi.application"
 
-# Database 
-
+# Database
 DATABASES = {
     "default": {
         "ENGINE": DBENGINE,
@@ -107,11 +106,7 @@ DATABASES = {
     }
 }
 
-
-
 # Password validation
-# https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",

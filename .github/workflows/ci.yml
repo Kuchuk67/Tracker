@@ -20,7 +20,7 @@ jobs:
       run: |
         ssh -o StrictHostKeyChecking=no -l ${{ secrets.SSH_USER }} ${{ secrets.SERVER_IP }}
           mkdir myapp
-          cd home/user_n/tracker
+          cd ~/tracker
           rsync -avz . ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }}:${{ secrets.DEPLOY_DIR }}
             
         

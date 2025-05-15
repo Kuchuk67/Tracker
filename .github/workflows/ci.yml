@@ -11,6 +11,12 @@ jobs:
       with:
         ssh-private-key: ${{ secrets.SSH_KEY }}
 
+    - name: SSH
+      run: |
+        ssh -o StrictHostKeyChecking=no user_n@130.193.52.164 << 'EOF'
+          cd ${{ secrets.DEPLOY_DIR }}
+        EOF
+
     - name: Copy project files to server
       run: |
         rsync -avz . user_n@130.193.52.164:~/tracker/

@@ -7,13 +7,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Set up SSH
-      uses: webfactory/ssh-agent@v0.8.1
+      uses: webfactory/ssh-agent@v0.9.1
       with:
         ssh-private-key: ${{ secrets.SSH_KEY }}
 
     - name: Copy project files to server
       run: |
-        rsync -avz . ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }}:${{ secrets.DEPLOY_DIR }}
+        rsync -avz . ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }}:/tracker/
             
         
 

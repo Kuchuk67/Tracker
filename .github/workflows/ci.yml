@@ -19,6 +19,6 @@ jobs:
 
     - name: Copy project files to server
       run: |
-        rsync -avz README.md user_n@130.193.52.164:/home/user_n/tracker/
+        rsync -avz ~/README.md user_n@130.193.52.164:/home/user_n/tracker/
         
 

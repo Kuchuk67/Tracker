@@ -1,54 +1,18 @@
 name: Django CI/CD Pipeline
 on: [push, pull_request]
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-    steps:
-    - name: Set up SSH
-      uses: webfactory/ssh-agent@v0.9.1
-      with:
-        ssh-private-key: ${{ secrets.SSH_KEY }}
 
+    steps:
     - name: Check out code
       uses: actions/checkout@v3
 
-    - name: SSH
-      run: |
-        ssh -o StrictHostKeyChecking=no user_n@130.193.52.164 << 'EOF'
-        EOF
-    - name: test
-      run: ls $GITHUB_WORKSPACE
-    - name: Copy project files to server
-      run: |
-        rsync -avz $GITHUB_WORKSPACE/* ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }}:${{ secrets.DEPLOY_DIR }}
+    - name: Log in to Docker Hub
+      run: echo ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }} | docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
 
-    - name: Install dependencies on server
-      run: |
-        ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
-          cd tracker/backend
-          source $(poetry env info --path)/bin/activate
-          poetry install
-        EOF
+    - name: Build Docker image
+      run: docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:${{ github.sha }} .
 
-    - name: Apply migrations on server
-      run: |
-        ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
-          cd tracker/backend
-          source $(poetry env info --path)/bin/activate
-          python manage.py migrate
-        EOF
-
-    - name: Collect static files on server
-      run: |
-        ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }} ${{ secrets.SERVER_IP }} << 'EOF'
-          cd ${{ secrets.DEPLOY_DIR }}
-          cd backend
-          source $(poetry env info --path)/bin/activate
-          python manage.py collectstatic --noinput
-        EOF
-
-    - name: Restart application
-      run: |
-        ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }} ${{ secrets.SERVER_IP }} << 'EOF'
-          sudo systemctl restart myapp.service
-        EOF
+    - name: Push Docker image to Docker Hub
+      run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:${{ github.sha }}

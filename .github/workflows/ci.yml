@@ -34,7 +34,7 @@ jobs:
 
     - name: Apply migrations on server
       run: |
-        ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }} ${{ secrets.SERVER_IP }} << 'EOF'
+        ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
           cd tracker/backend
           source $(poetry env info --path)/bin/activate
           python manage.py migrate

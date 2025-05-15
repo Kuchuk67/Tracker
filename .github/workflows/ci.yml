@@ -18,10 +18,7 @@ jobs:
         EOF
     - name: Copy project files to server
       run: |
-        ssh -o StrictHostKeyChecking=no -l ${{ secrets.SSH_USER }} ${{ secrets.SERVER_IP }}
-          mkdir myapp
-          cd ~/tracker
-          rsync -avz . ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }}:${{ secrets.DEPLOY_DIR }}
+        rsync -avz . ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }}:${{ secrets.DEPLOY_DIR }}
             
         
 

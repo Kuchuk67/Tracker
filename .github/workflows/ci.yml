@@ -4,17 +4,17 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Set up SSH
-      uses: webfactory/ssh-agent@v0.9.1
-      with:
-        ssh-private-key: ${{ secrets.SSH_KEY }}
-        
+    
+
     - name: Check out code
       uses: actions/checkout@v3
 
     - name: Log in to Docker Hub
       run: echo ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }} | docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
 
+    - name:
+      run: ls 
+      
     - name: Build Docker image
       run: docker build -f $GITHUB_WORKSPACE/backend/docker/dajngo/Dockerfile -t ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:${{ github.sha }} .
 

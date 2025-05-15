@@ -13,7 +13,7 @@ jobs:
       run: echo ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }} | docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
 
     - name:
-      run: ls backend
+      run: ls backend/docker
 
     - name: Build Docker image
       run: docker build -f backend/docker/dajngo/Dockerfile -t ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:${{ github.sha }} .

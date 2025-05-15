@@ -15,6 +15,4 @@ jobs:
       run: |
         rsync -avz . user_n@130.193.52.164:/home/user_n/tracker/
         
-                
-        
 

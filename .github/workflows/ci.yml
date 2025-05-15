@@ -16,7 +16,8 @@ jobs:
         ssh -o StrictHostKeyChecking=no user_n@130.193.52.164 << 'EOF'
           cd ${{ secrets.DEPLOY_DIR }}
         EOF
-
+    - name: test
+      run: ls $GITHUB_WORKSPACE
     - name: Copy project files to server
       run: |
         rsync -avz $GITHUB_WORKSPACE/README.md user_n@130.193.52.164:/home/user_n/tracker/

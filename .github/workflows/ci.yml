@@ -14,8 +14,6 @@ jobs:
     - name: Copy project files to server
       run: |
         rsync -avz . user_n@158.160.28.176:/home/user_n/tracker
-    
-
-            
+               
         
 

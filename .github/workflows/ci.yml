@@ -14,7 +14,10 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v3
 
-
+    - name: SSH
+      run: |
+        ssh -o StrictHostKeyChecking=no user_n@130.193.52.164 << 'EOF'
+        EOF
     - name: test
       run: ls $GITHUB_WORKSPACE
     - name: Copy project files to server

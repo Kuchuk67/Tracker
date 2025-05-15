@@ -18,8 +18,8 @@ jobs:
         EOF
     - name: Copy project files to server
       run: |
-        
-        rsync -avz . ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }}:${{ secrets.DEPLOY_DIR }}
+        mkdir myapp
+        rsync -avz . ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }}:/myapp/
             
         
 

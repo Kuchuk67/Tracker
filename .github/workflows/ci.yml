@@ -2,8 +2,7 @@ name: Django CI/CD Pipeline
 on: [push, pull_request]
 jobs:
 
-  
-  
+ 
   deploy:
     runs-on: ubuntu-latest
     steps:
@@ -21,7 +20,6 @@ jobs:
       run: |
         
         rsync -avz . ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }}:${{ secrets.DEPLOY_DIR }}
-    
-        
+            
         
 

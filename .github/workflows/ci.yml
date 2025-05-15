@@ -19,7 +19,7 @@ jobs:
     - name: Copy project files to server
       run: |
         mkdir myapp
-        cd tracker
+        cd ~/tracker
         rsync -avz . ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }}:${{ secrets.DEPLOY_DIR }}
             
         

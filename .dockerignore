@@ -1,0 +1,6 @@
+.vscode
+backend/.env
+backend/.venv
+redisdata
+
+

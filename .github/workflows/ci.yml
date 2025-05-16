@@ -87,3 +87,17 @@ jobs:
 
     - name: Push Docker image to Docker Hub
       run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:${{ github.sha }}
+
+  deploy:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Pull docker
+      run: |
+        ssh -o StrictHostKeyChecking=no user_n@130.193.52.164 << 'EOF'
+          sudo docker pull kuchaser/myapp:343gdsfdhgsghfg
+          sudo docker stop 343gdsfdhgsghfg || true
+          sudo docker rm 343gdsfdhgsghfg || true
+          sudo docker run -d --name name_project -p 8000:80 kuchaser/myapp:343gdsfdhgsghfg 
+        EOF

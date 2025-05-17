@@ -25,7 +25,6 @@ jobs:
           sudo docker-compose down || true
           sudo docker-compose up
 
-
         EOF
 
 

@@ -14,7 +14,7 @@ jobs:
 
     - name: Pull docker
       run: |
-        ssh -o StrictHostKeyChecking=no user_n@158.160.72.130 << 'EOF'
+        ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
           
 
         EOF

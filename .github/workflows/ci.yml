@@ -42,10 +42,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4.2.2
+    
 
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4.2.2
 
     - name: Create .env 
       run: |
@@ -53,6 +53,7 @@ jobs:
         ${{ secrets.ENV }}
         EOF
       shell: bash
+
 
     - name: Set up Docker Buildx
       uses: hoverkraft-tech/compose-action@v2.0.1

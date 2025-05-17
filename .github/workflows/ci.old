@@ -96,9 +96,10 @@ jobs:
     - name: Pull docker
       run: |
         ssh -o StrictHostKeyChecking=no user_n@158.160.72.130 << 'EOF'
-          docker pull kuchaser/myapp:343gdsfdhgsghfg
+          
 
         EOF
+  # docker pull kuchaser/myapp:343gdsfdhgsghfg
   # docker stop 343gdsfdhgsghfg || true
     # docker rm 343gdsfdhgsghfg || true
   # docker run -d --name name_project -p 8000:80 kuchaser/myapp:343gdsfdhgsghfg 

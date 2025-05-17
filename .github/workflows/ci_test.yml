@@ -1,0 +1,13 @@
+name: Django CI/CD Pipeline
+on: [push, pull_request]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Pull docker
+      run: |
+        ssh -o StrictHostKeyChecking=no user_n@158.160.72.130 << 'EOF'
+          
+
+        EOF

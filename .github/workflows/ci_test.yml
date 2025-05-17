@@ -1,6 +1,31 @@
 name: Django CI/CD Pipeline
 on: [push, pull_request]
 jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Check out code
+      uses: actions/checkout@v3
+
+    - name: Log in to Docker Hub
+      run: echo ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }} | docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
+
+    - name:
+      run: ls backend/docker/django
+
+    - name: Build Docker image
+      run: docker build -f backend/docker/django/Dockerfile -t ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:${{ github.sha }} .
+
+    - name: Push Docker image to Docker Hub
+      run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:${{ github.sha }}
+    
+    - name: Push Docker image to Docker Hub
+      run: docker tag ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:${{ github.sha }} ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:latest
+
+      
   deploy:
     runs-on: ubuntu-latest
     steps:
@@ -18,7 +43,7 @@ jobs:
     - name: Pull docker
       run: |
         ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
-          sudo docker pull kuchaser/myapp:554676a0f12e
+          sudo docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:latest
 
         EOF
 

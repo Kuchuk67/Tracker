@@ -46,6 +46,10 @@ jobs:
       run: |
         ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
           sudo docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:latest
+          docker pull kuchaser/myapp
+          docker stop latest || true
+          docker rm latest || true
+          docker run -d --name name_project -p 8000:80 kuchaser/myapp:latest 
 
         EOF
 

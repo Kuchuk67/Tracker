@@ -10,3 +10,15 @@ sudo apt install docker.io
 перезапустить сервер
 
 проверить работу докера - sudo docker ps
+
+
+sudo apt-get install docker-compose-plugin
+проверка docker-compose version
+
+
+
+sudo docker run -d -p 8080:80 nginx
+sudo docker run -d -p 8080:80 nginx
+sudo docker run -d -p 8080:80 nginx
+sudo docker run -d -p 8080:80 nginx
+sudo docker run -d -p 8080:80 nginx

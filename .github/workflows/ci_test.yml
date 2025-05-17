@@ -21,9 +21,10 @@ jobs:
       run: |
         ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
           sudo docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:latest
-          sudo docker stop latest || true
-          sudo docker rm latest || true
-          sudo docker run -d --name name_project -p 8000:80 kuchaser/myapp:latest 
+          cd tracker
+          sudo docker-compose down || true
+          sudo docker-compose up
+
 
         EOF
 

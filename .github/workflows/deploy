@@ -1,0 +1,8 @@
+1. Обновляем индексы пакетов apt
+sudo apt update
+
+
+2. Устанавливаем дополнительные пакеты
+sudo apt install curl software-properties-common ca-certificates apt-transport-https -y
+
+sudo apt install docker.io

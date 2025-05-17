@@ -15,6 +15,9 @@ jobs:
     - name: Pull docker
       run: |
         ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
-          
+          docker pull ${{ secrets.DOCKER_APP }}:${{ secrets.DOCKER_APP_ID }}
+          docker stop ${{ secrets.DOCKER_APP_ID }} || true
+          docker rm ${{ secrets.DOCKER_APP_ID }} || true
+          docker run -d --name name_project -p 8000:80 ${{ secrets.DOCKER_APP }}:${{ secrets.DOCKER_APP_ID }} 
 
         EOF

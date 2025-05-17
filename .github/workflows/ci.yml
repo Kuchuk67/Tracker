@@ -47,6 +47,16 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4.2.2
 
+    - name: Set up SSH
+      uses: webfactory/ssh-agent@v0.9.1
+      with:
+        ssh-private-key: ${{ secrets.SSH_KEY }}
+
+    - name: Pull docker
+      run: |
+        sudo apt-get install docker-compose-plugin
+
+
     - name: Create .env 
       run: |
         cat << 'EOF' > backend/.env
@@ -55,13 +65,13 @@ jobs:
       shell: bash
 
 
-    - name: Set up Docker Buildx
-      uses: hoverkraft-tech/compose-action@v2.0.1
-      with:
-        compose-file: "./docker-compose.yaml"
+    # - name: Set up Docker Buildx
+    #   uses: hoverkraft-tech/compose-action@v2.0.1
+    #   with:
+    #     compose-file: "./docker-compose.yaml"
 
-    - name: Set up QEMU
-      uses: docker/setup-qemu-action@v1
+    # - name: Set up QEMU
+    #   uses: docker/setup-qemu-action@v1
     
     - name: Log in to Docker Hub
       run: echo ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }} | docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
@@ -71,7 +81,7 @@ jobs:
     - name: Build and push Docker images
       run: |
         docker-compose -f docker-compose.yaml build
-    #    docker-compose -f docker-compose.yaml create
+        docker-compose create
 
     # - name: Login to Docker Hub
     #   uses: docker/login-action@v3
@@ -85,10 +95,10 @@ jobs:
     # - name: Set up Docker Buildx
     #   uses: docker/setup-buildx-action@v3
 
-    - name: Build and push
-      uses: docker/build-push-action@v6
-      with:
-        push: true
-        tags: user/app:latest
+    # - name: Build and push
+    #   uses: docker/build-push-action@v6
+    #   with:
+    #     push: true
+    #     tags: user/app:latest
   
  

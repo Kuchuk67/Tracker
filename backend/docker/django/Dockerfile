@@ -12,7 +12,7 @@ RUN pip install poetry
 COPY ./backend/pyproject.toml ./
 RUN poetry install --no-root
 
-COPY ./backend .
+COPY . .
 
 COPY ./backend/docker/django/start /start
 RUN sed -i 's/\r$//g' /start
@@ -28,4 +28,4 @@ RUN chmod +x /start_celerybeat
 
 EXPOSE 8000
 
-#CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["/start"]

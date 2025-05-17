@@ -101,3 +101,4 @@ jobs:
           sudo docker rm 343gdsfdhgsghfg || true
           sudo docker run -d --name name_project -p 8000:80 kuchaser/myapp:343gdsfdhgsghfg 
         EOF
+         

@@ -80,7 +80,7 @@ jobs:
     - name: Build and push all images
       run: |
 
-        docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:${{ github.sha }} .
+        docker build -f ./backend/docker/django/Dockerfile -t ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:${{ github.sha }} .
         docker push ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:${{ github.sha }}
   
  

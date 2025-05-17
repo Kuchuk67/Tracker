@@ -53,9 +53,9 @@ jobs:
         ssh-private-key: ${{ secrets.SSH_KEY }}
 
     - name: Run docker compose
-        uses: hoverkraft-tech/compose-action@v2.0.1
-        with:
-          compose-file: "./docker/docker-compose.yml"
+      uses: hoverkraft-tech/compose-action@v2.0.1
+      with:
+        compose-file: "./docker/docker-compose.yml"
 
     - name: Create .env 
       run: |

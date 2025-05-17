@@ -42,11 +42,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - uses: actions/checkout@v4.2.2
+
     - name: Checkout repository
       uses: actions/checkout@v2
 
     - name: Set up Docker Buildx
       uses: hoverkraft-tech/compose-action@v0.0.0
+      with:
+          compose-file: "./docker-compose.yaml"
 
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1

@@ -51,18 +51,20 @@ jobs:
       uses: webfactory/ssh-agent@v0.9.1
       with:
         ssh-private-key: ${{ secrets.SSH_KEY }}
-
-    - name: Run docker compose
-      uses: hoverkraft-tech/compose-action@v2.0.1
-      with:
-        compose-file: "./docker-compose.yaml"
-
+        
     - name: Create .env 
       run: |
         cat << 'EOF' > backend/.env
         ${{ secrets.ENV }}
         EOF
       shell: bash
+
+    - name: Run docker compose
+      uses: hoverkraft-tech/compose-action@v2.0.1
+      with:
+        compose-file: "./docker-compose.yaml"
+
+
 
 
     

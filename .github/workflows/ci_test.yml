@@ -7,6 +7,8 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v3
 
+    
+
     - name: Pull docker
       run: |
         ssh -o StrictHostKeyChecking=no user_n@158.160.72.130 << 'EOF'

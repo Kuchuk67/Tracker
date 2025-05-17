@@ -7,7 +7,10 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v3
 
-    
+    - name: Set up SSH
+      uses: webfactory/ssh-agent@v0.9.1
+      with:
+        ssh-private-key: ${{ secrets.SSH_KEY }}
 
     - name: Pull docker
       run: |

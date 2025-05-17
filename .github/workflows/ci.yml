@@ -77,11 +77,10 @@ jobs:
         docker compose -f docker-compose.yaml build
         docker compose create
 # docker tag tracker-celery_beat kuchaser/myapp:tracker-celery_beat 
-    - name: Build and push
-      uses: docker/build-push-action@v6
-      with:
-        context: .
-        push: true
-        tags: user/app:latest
+    - name: Build and push all images
+      run: |
+
+        docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:${{ github.sha }} .
+        docker push ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:${{ github.sha }}
   
  

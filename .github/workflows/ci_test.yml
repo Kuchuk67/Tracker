@@ -22,7 +22,8 @@ jobs:
         ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
           sudo docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:latest
           ls
-          cd Tracker
+          cd tracker
+          ls
           sudo docker-compose down || true
           sudo docker-compose up
 

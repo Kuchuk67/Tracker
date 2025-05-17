@@ -51,7 +51,7 @@ jobs:
       uses: webfactory/ssh-agent@v0.9.1
       with:
         ssh-private-key: ${{ secrets.SSH_KEY }}
-        
+
     - name: Create .env 
       run: |
         cat << 'EOF' > backend/.env
@@ -75,7 +75,7 @@ jobs:
     - name: Build and push Docker images
       run: |
         docker-compose -f docker-compose.yaml build
-        docker-compose create
+  # docker-compose create
 # docker tag tracker-celery_beat kuchaser/myapp:tracker-celery_beat 
   
  

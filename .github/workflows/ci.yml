@@ -62,8 +62,7 @@ jobs:
         push: true
         tags: ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:latest
 
-    - name: Build Docker images
-      run: docker-compose build
+    
 
 
 

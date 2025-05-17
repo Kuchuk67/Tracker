@@ -55,15 +55,17 @@ jobs:
     - name: Log in to Docker Hub
       run: echo ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }} | docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
 
-    - name: Build Docker images
-      run: docker-compose build
-
     - name: Push Docker images
       uses: docker/build-push-action@v2
       with:
         context: .
         push: true
         tags: ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:latest
+
+    - name: Build Docker images
+      run: docker-compose build
+
+
 
 
 

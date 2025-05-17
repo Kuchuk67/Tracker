@@ -89,13 +89,13 @@ jobs:
       run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:${{ github.sha }}
 
   deploy:
-    needs: lint
+    needs: build
     runs-on: ubuntu-latest
     steps:
 
     - name: Pull docker
       run: |
-        ssh -o StrictHostKeyChecking=no user_n@130.193.52.164 << 'EOF'
+        ssh -o StrictHostKeyChecking=no user_n@158.160.72.130 << 'EOF'
           sudo docker pull kuchaser/myapp:343gdsfdhgsghfg
           sudo docker stop 343gdsfdhgsghfg || true
           sudo docker rm 343gdsfdhgsghfg || true

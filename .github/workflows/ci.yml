@@ -97,13 +97,14 @@ jobs:
         EOF
       shell: bash
 
-    # - name: Install dependencies on server
-    #   run: |
-    #     ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
-    #       cd tracker/backend
-    #       source $(poetry env info --path)/bin/activate
-    #       poetry install
-    #     EOF
+    - name:
+      run: |
+        ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
+          cd tracker/backend/config
+          sed -i 's/ALLOWED_HOSTS = []/нALLOWED_HOSTS = ["${{ secrets.SERVER_IP }}"]/g' settings.py 
+        EOF
+      shell: bash
+
 
     - name: Install on server
       run: |

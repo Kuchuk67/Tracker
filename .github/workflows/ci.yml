@@ -72,7 +72,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: lint
     steps:
-    - name: Set up SSH
+    - name: Set up SSH key
       uses: webfactory/ssh-agent@v0.9.1
       with:
         ssh-private-key: ${{ secrets.SSH_KEY }}
@@ -80,12 +80,11 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v3
 
-    - name: SSH
+    - name: SSH CONECT
       run: |
         ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
         EOF
-    - name: test
-      run: ls $GITHUB_WORKSPACE
+
     - name: Copy project files to server
       run: |
         rsync -avz $GITHUB_WORKSPACE/* ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }}:${{ secrets.DEPLOY_DIR }}
@@ -98,19 +97,19 @@ jobs:
         EOF
       shell: bash
 
-    - name: Install dependencies on server
-      run: |
-        ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
-          cd tracker/backend
-          source $(poetry env info --path)/bin/activate
-          poetry install
-        EOF
+    # - name: Install dependencies on server
+    #   run: |
+    #     ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
+    #       cd tracker/backend
+    #       source $(poetry env info --path)/bin/activate
+    #       poetry install
+    #     EOF
 
-    - name: Apply migrations on server
+    - name: Install on server
       run: |
         ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
           cd tracker
-          docker-composer up -d --build
+          docker-compose up -d --build
           # source $(poetry env info --path)/bin/activate
           # python manage.py migrate
         EOF

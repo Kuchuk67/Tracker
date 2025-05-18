@@ -87,7 +87,7 @@ jobs:
 
     - name: Copy project files to server
       run: |
-        sudo rsync -avz --exclude=redisdata e $GITHUB_WORKSPACE/* ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }}:${{ secrets.DEPLOY_DIR }}
+        rsync -n --exclude=redisdata e $GITHUB_WORKSPACE/* ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }}:${{ secrets.DEPLOY_DIR }}
 
     - name: Create .env 
       run: |

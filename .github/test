@@ -83,4 +83,3 @@ jobs:
         docker build -f ./backend/docker/django/Dockerfile -t ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:${{ github.sha }} .
         docker push ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:${{ github.sha }}
   
- 

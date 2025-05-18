@@ -16,7 +16,7 @@ from pathlib import Path
 
 from django.core.management.utils import get_random_secret_key
 from dotenv import load_dotenv
-import sys
+
 
 # Загрузка переменных из .env-файла
 load_dotenv()
@@ -108,8 +108,6 @@ DATABASES = {
         "PORT": SQL_PORT,
     }
 }
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators

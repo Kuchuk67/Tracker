@@ -90,6 +90,14 @@ jobs:
       run: |
         rsync -avz $GITHUB_WORKSPACE/* ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }}:${{ secrets.DEPLOY_DIR }}
 
+    - name: Create .env 
+      run: |
+        ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
+          cat << 'EOF' > tracker/backend/.env
+          ${{ secrets.ENV }}
+        EOF
+      shell: bash
+
     - name: Install dependencies on server
       run: |
         ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'

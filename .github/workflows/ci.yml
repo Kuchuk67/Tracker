@@ -87,7 +87,7 @@ jobs:
 
     - name: Copy project files to server
       run: |
-        rsync -avz $GITHUB_WORKSPACE/* ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }}:${{ secrets.DEPLOY_DIR }}
+        rsync -avz --exclude=redisdata e $GITHUB_WORKSPACE/* ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }}:${{ secrets.DEPLOY_DIR }}
 
     - name: Create .env 
       run: |
@@ -97,11 +97,11 @@ jobs:
         EOF
       shell: bash
 
-    - name:
+    - name: Editer ALLOWED_HOSTS
       run: |
         ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
           cd tracker/backend/config
-          sed -i 's/ALLOWED_HOSTS = []/нALLOWED_HOSTS = ["${{ secrets.SERVER_IP }}"]/g' settings.py 
+          sed -i 's/ALLOWED_HOSTS = []/ALLOWED_HOSTS = ["${{ secrets.SERVER_IP }}"]/g' settings.py 
         EOF
       shell: bash
 

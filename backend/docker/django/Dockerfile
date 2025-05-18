@@ -27,5 +27,5 @@ RUN sed -i 's/\r$//g' /start_celerybeat
 RUN chmod +x /start_celerybeat
 
 EXPOSE 8000
-
-CMD ["/start"]
+ENTRYPOINT ["/start"]
+#CMD ["/start"]

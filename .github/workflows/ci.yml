@@ -74,7 +74,7 @@ jobs:
     steps:
     - name: Build and push
       run: |
-        docker build -f backend/docker/django/Dockerfile -t ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:${{ github.sha }} .
+        docker build -f tracker/backend/docker/django/Dockerfile -t ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:${{ github.sha }} .
         docker tag ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:${{ github.sha }} ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:latest
         docker push ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:latest
         docker pushrm ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:latest

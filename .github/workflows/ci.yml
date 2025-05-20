@@ -80,8 +80,8 @@ jobs:
       with:
         python-version: '3.12'
 
-    - name:
-      run: ls
+    - name: Log in to Docker Hub
+      run: echo ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }} | docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
 
     - name: Build and push
       run: |

@@ -72,6 +72,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: lint
     steps:
+
+    - name:
+      run: ls
+      
     - name: Build and push
       run: |
         docker build -f tracker/backend/docker/django/Dockerfile -t ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:${{ github.sha }} .

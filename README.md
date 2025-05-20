@@ -14,7 +14,27 @@
 а также 10 последних публичных привычек
 
 
-# Установка 
+# установка на удаленном сервере
+подготовка удаленного сервера к работе с докером
+
+1. подключаемся по SSH
+```ssh -l my_user@my_ip```
+2. Обновляем индексы пакетов apt
+```sudo apt update```
+3. устанавливаем poetry
+```curl -sSL https://install.python-poetry.org | python3 -```
+4. Устанавливаем дополнительные пакеты
+```sudo apt install curl software-properties-common ca-certificates apt-transport-https -y```
+5. Устанавливаем Докер
+```sudo apt install docker.io```
+6. перезапустить сервер
+проверить работу докера - ```sudo docker ps```
+7. Устанавливаем Докер-Компоуз
+```sudo apt-get install docker-compose-plugin```
+проверка ```docker-compose version```
+
+
+# Установка на локальном докере
 ! Бэкенд часть находится в папке 'backend'
 При инсталляции установите рабочий каталог ./backend
 ~\Projects\Tracker\backend

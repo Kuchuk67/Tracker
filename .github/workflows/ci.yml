@@ -88,7 +88,18 @@ jobs:
         docker build -f backend/docker/django/Dockerfile -t ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:${{ github.sha }} .
         docker tag ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:${{ github.sha }} ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:latest
         docker push ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:latest
-        docker pushrm ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:latest
+    - name: push README to Dockerhub
+      uses: christian-korneck/update-container-description-action@v1
+ #     env:
+ #       DOCKER_USER: my-user
+  #      DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
+      with:
+        destination_container_repo: ${{ secrets.DOCKER_HUB_USERNAME }}/myapp
+        provider: dockerhub
+        short_description: 'my short description 😊'
+        readme_file: 'README.md'
+
+# docker pushrm ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:latest
         
 # docker push ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:${{ github.sha }}
 

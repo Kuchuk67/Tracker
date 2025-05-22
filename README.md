@@ -34,6 +34,12 @@
 проверка ```docker-compose version```
 
 
+git clone --no-checkout https://github.com/Kuchuk67/Tracker.git 
+git sparse-checkout init --cone  
+git sparse-checkout set docker_app  
+git checkout 
+
+
 # Установка на локальном докере
 ! Бэкенд часть находится в папке 'backend'
 При инсталляции установите рабочий каталог ./backend

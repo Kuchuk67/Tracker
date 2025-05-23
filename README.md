@@ -44,6 +44,8 @@ mkdir tracker
 
 cd tracker
 
+docker pull kuchaser/myapp:latest
+
 sudo curl -Lo nginx.conf https://github.com/Kuchuk67/Tracker/raw/refs/heads/deploy/docker_app/nginx.conf
 
 

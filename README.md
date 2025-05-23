@@ -19,8 +19,11 @@
 
 1. подключаемся по SSH
 ```ssh -l my_user@my_ip```
-2. Обновляем индексы пакетов apt
-```sudo apt update```
+2. Обновляем индексы пакетов 
+```
+sudo apt update -y
+sudo apt upgrade -y
+```
 3. устанавливаем poetry
 ```curl -sSL https://install.python-poetry.org | python3 -```
 4. Устанавливаем дополнительные пакеты
@@ -30,14 +33,30 @@
 6. перезапустить сервер
 проверить работу докера - ```sudo docker ps```
 7. Устанавливаем Докер-Компоуз
-```sudo apt-get install docker-compose-plugin```
+```
+curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+chmod +x /usr/local/bin/docker-compose
+```
 проверка ```docker-compose version```
 
+mkdir tracker
 
-git clone --no-checkout https://github.com/Kuchuk67/Tracker.git 
-git sparse-checkout init --cone  
-git sparse-checkout set docker_app  
-git checkout 
+cd tracker
+
+sudo curl -Lo nginx.conf https://github.com/Kuchuk67/Tracker/raw/refs/heads/deploy/docker_app/nginx.conf
+
+
+sudo curl -Lo docker-compose.yaml https://github.com/Kuchuk67/Tracker/raw/refs/heads/deploy/docker_app/docker-compose.yaml
+
+
+sudo curl -Lo Dockerfile https://github.com/Kuchuk67/Tracker/raw/refs/heads/deploy/docker_app/Dockerfile
+
+
+
+
+
+
 
 
 # Установка на локальном докере

@@ -10,7 +10,7 @@ WORKDIR /app
 COPY ./.env ./backend/.env
 RUN cd ./backend/config
 RUN sed -i 's/ALLOWED_HOSTS = \[\]/ALLOWED_HOSTS = \["${{ MY_SERVER }}"\]/1' settings.py 
-RUN cd ../
+RUN cd ../../
 
 # Копируем файл с зависимостями и устанавливаем их
 RUN pip install poetry

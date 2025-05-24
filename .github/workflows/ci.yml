@@ -1,8 +1,8 @@
 name: Django CI/CD Pipeline
-on:
-  pull_request: # When PRs are made to the develop & main branches
-    branches:
-      - develop
+on: [push]
+  # pull_request: # When PRs are made to the develop & main branches
+  #   branches:
+  #     - develop
 jobs:
   
   test:
@@ -150,8 +150,8 @@ jobs:
           cd tracker
           sudo docker system prune -af && \
           sudo docker volume prune -f && \
-          sudo docker-compose -f docker-compose.yaml down --remove-orphans && \
-          sudo docker-compose -f docker-compose.yaml pull && \
-          sudo docker-compose -f docker-compose.yaml up -d --build --force-recreate
+          sudo docker compose -f docker-compose.yaml down --remove-orphans && \
+          sudo docker compose -f docker-compose.yaml pull && \
+          sudo docker compose -f docker-compose.yaml up -d --build --force-recreate
 
         EOF

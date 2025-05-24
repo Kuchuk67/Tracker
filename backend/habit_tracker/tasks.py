@@ -2,6 +2,7 @@ from config.celery import app
 from habit_tracker.models import Habit
 from telegram_bot.services import send_telegram_message
 
+
 @app.task()
 def task_habit(id_habit):
     print("++++++++++++", id_habit)

@@ -25,6 +25,5 @@ class UserCreateSerializer(serializers.ModelSerializer):
         fields = ["email", "password", "nick_telegram"]
 
     def create(self, validated_data):
-        validated_data["password"] = make_password(
-            validated_data.get("password"))
+        validated_data["password"] = make_password(validated_data.get("password"))
         return super(UserCreateSerializer, self).create(validated_data)

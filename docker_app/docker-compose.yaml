@@ -20,7 +20,7 @@ services:
     networks:
       - backend
     env_file:
-      - ./backend/.env
+      - .env
 
   redis:
     image: redis
@@ -38,47 +38,48 @@ services:
     restart: always
     build:
       context: .
-      dockerfile: ./backend/docker/django/Dockerfile
+      dockerfile: ./Dockerfile
     command: /start
     ports:
       - 8000:8000
     env_file:
-      - ./backend/.env
+      - .env
     networks:
       - backend
     depends_on: 
       - db
 
   celery_worker:
-    restart: always
-    #image: celery_worker
-    build:
-      context: .
-      dockerfile: ./backend/docker/django/Dockerfile
-    command: /start_celeryworker
-    networks:
-      - backend
-    volumes:
-      - celery:/celery
-    depends_on:
-      - redis
-      - db
-      - django
+     restart: always
+     build:
+       context: .
+       dockerfile: ./Dockerfile
+     command: /start_celeryworker
+     networks:
+       - backend
+     volumes:
+       - celery:/celery
+     depends_on:
+       - redis
+       - db
+       - django
 
   celery_beat:
-    restart: always
-    build:
-      context: .
-      dockerfile: ./backend/docker/django/Dockerfile
-    command: /start_celerybeat 
-    volumes:
-      - celery:/celery
-    networks:
-      - backend
-    depends_on:
-      - redis
-      - db
-      - django
+     restart: always
+     build:
+       context: .
+       dockerfile: ./Dockerfile
+     command: /start_celerybeat
+     volumes:
+       - celery:/celery
+     env_file:
+      - .env
+     networks:
+       - backend
+     depends_on:
+       - redis
+       - db
+       - django
 
       
 volumes:

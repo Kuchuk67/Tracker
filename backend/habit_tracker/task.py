@@ -1,7 +1,5 @@
 from datetime import datetime
-from django_celery_beat.models import (CrontabSchedule,
-                                       PeriodicTask)
-
+from django_celery_beat.models import CrontabSchedule, PeriodicTask
 
 
 class TaskManager:
@@ -14,10 +12,10 @@ class TaskManager:
     """
 
     def __init__(
-            self,
-            habit_pk: int,
-            period: str,
-            time_start: datetime,
+        self,
+        habit_pk: int,
+        period: str,
+        time_start: datetime,
     ):
         self.habit_pk = habit_pk
         self.period = period
@@ -70,7 +68,7 @@ class TaskManager:
                 one_off=False,
                 name=name_task,
                 task=task,
-                #start_time=datetime.now(),
+                # start_time=datetime.now(),
                 args=[self.habit_pk],
             )
         else:
@@ -80,6 +78,3 @@ class TaskManager:
 
     def update(self, kwargs):
         self._task_update_status_event(kwargs)
-
-
-

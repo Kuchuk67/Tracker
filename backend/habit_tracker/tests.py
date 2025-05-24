@@ -44,7 +44,7 @@ class HabitTestCase(TestCase):
             action="Посмотреть стендап",
             time=10,
             public=False,
-            nice=True
+            nice=True,
         )
 
         Habit.objects.create(
@@ -83,28 +83,34 @@ class HabitTestCase(TestCase):
         self.assertEqual(len(response.data["results"]), 3)
 
     def test_habit_post(self):
-        fixture_data = dict({"place": "дом",
-                             "time_action": "08:00:00",
-                             "action": "действие",
-                             "nice": True,
-                             "related": None,
-                             "reward": None,
-                             "time": 1,
-                             "public": False,
-                             "user": 1,
-                             "period": "1,2,4"
-                             })
-        data_response = dict({'place': 'дом',
-                              'time_action': '08:00:00',
-                              'action': 'действие',
-                              'nice': True,
-                              'related': None,
-                              'period': '1,2,4',
-                              'reward': None,
-                              'time': 1,
-                              'public': False,
-                              'user': self.user_1.pk
-                              })
+        fixture_data = dict(
+            {
+                "place": "дом",
+                "time_action": "08:00:00",
+                "action": "действие",
+                "nice": True,
+                "related": None,
+                "reward": None,
+                "time": 1,
+                "public": False,
+                "user": 1,
+                "period": "1,2,4",
+            }
+        )
+        data_response = dict(
+            {
+                "place": "дом",
+                "time_action": "08:00:00",
+                "action": "действие",
+                "nice": True,
+                "related": None,
+                "period": "1,2,4",
+                "reward": None,
+                "time": 1,
+                "public": False,
+                "user": self.user_1.pk,
+            }
+        )
         url = "/api/v1/habit"
         response = self.client.post(
             path=url,
@@ -118,17 +124,20 @@ class HabitTestCase(TestCase):
         """
         Проверка валидаторов
         """
-        fixture_data = dict({"place": "дом",
-                             "time_action": "08:00:00",
-                             "action": "действие",
-                             "nice": True,
-                             "related": None,
-                             "reward": None,
-                             "time": 1,
-                             "public": False,
-                             "user": 1,
-                             "period": "1,2,4"
-                             })
+        fixture_data = dict(
+            {
+                "place": "дом",
+                "time_action": "08:00:00",
+                "action": "действие",
+                "nice": True,
+                "related": None,
+                "reward": None,
+                "time": 1,
+                "public": False,
+                "user": 1,
+                "period": "1,2,4",
+            }
+        )
         url = "/api/v1/habit"
 
         """

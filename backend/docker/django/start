@@ -5,6 +5,8 @@ set -o pipefail
 
 cd backend
 
+mkdir static
+
 python manage.py makemigrations
 python manage.py migrate
 

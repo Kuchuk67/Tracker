@@ -40,19 +40,27 @@ chmod +x /usr/local/bin/docker-compose
 ```
 проверка ```docker-compose version```
 
-mkdir tracker
-
-cd tracker
-
-docker pull kuchaser/myapp:latest
-
-sudo curl -Lo nginx.conf https://github.com/Kuchuk67/Tracker/raw/refs/heads/deploy/docker_app/nginx.conf
 
 
-sudo curl -Lo docker-compose.yaml https://github.com/Kuchuk67/Tracker/raw/refs/heads/deploy/docker_app/docker-compose.yaml
 
 
-sudo curl -Lo Dockerfile https://github.com/Kuchuk67/Tracker/raw/refs/heads/deploy/docker_app/Dockerfile
+```
+git clone https://github.com/Kuchuk67/Tracker.git -b deploy
+```
+```
+cd tracker\backend
+```
+В этой категории создать по примеру файла .env_example
+файл .env
+
+```
+cd ..\
+```
+
+```
+sudo docker-compose -f docker-compose.yaml up -d 
+```
+
 
 
 

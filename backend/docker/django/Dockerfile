@@ -14,6 +14,10 @@ RUN poetry install --no-root
 
 COPY . .
 
+#RUN cd ./backend/config
+#RUN sed -i 's/ALLOWED_HOSTS = \[\]/ALLOWED_HOSTS = \["${{ MY_SERVER }}"\]/1' settings.py 
+#RUN cd ../../
+
 COPY ./backend/docker/django/start /start
 RUN sed -i 's/\r$//g' /start
 RUN chmod +x /start

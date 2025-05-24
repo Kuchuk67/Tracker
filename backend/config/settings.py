@@ -20,6 +20,7 @@ from dotenv import load_dotenv
 
 # Загрузка переменных из .env-файла
 load_dotenv()
+MY_HOST = os.getenv("MY_HOST")
 
 SQL_HOST = os.getenv("POSTGRES_HOST")
 SQL_DATABASE = os.getenv("POSTGRES_DB")
@@ -42,7 +43,7 @@ SECRET_KEY = get_random_secret_key()
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [MY_HOST]
 
 # Application definition
 

@@ -3,8 +3,7 @@ on: [push]
   # pull_request: # When PRs are made to the develop & main branches
   #   branches:
   #     - develop
-jobs:
-  
+jobs:  
   test:
     runs-on: ubuntu-latest
     steps:

@@ -83,3 +83,9 @@ jobs:
         docker build -f ./backend/docker/django/Dockerfile -t ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:${{ github.sha }} .
         docker push ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:${{ github.sha }}
   
+
+https://docs.docker.com/get-started/docker-concepts/building-images/build-tag-and-publish-an-image/#:~:text=docker%20build%20%2Dt%20my%2Dusername/my%2Dimage%20 .
+15:56
+https://habr.com/ru/articles/651813/
+15:56
+https://habr.com/ru/articles/804325/

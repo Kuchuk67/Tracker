@@ -3,11 +3,16 @@ from datetime import datetime
 from channels.db import database_sync_to_async
 from django.core.management.base import BaseCommand
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
-from telegram.ext import (ApplicationBuilder, CallbackQueryHandler,
-                          CommandHandler, ContextTypes)
+from telegram.ext import (
+    ApplicationBuilder,
+    CallbackQueryHandler,
+    CommandHandler,
+    ContextTypes,
+)
 from habit_tracker.models import Habit
 from users.models import CustomUser
 from config.settings import BOT_TOKEN
+
 
 class Command(BaseCommand):
 
@@ -24,8 +29,7 @@ class Command(BaseCommand):
 
     @database_sync_to_async
     def add_id_chat(self, update):
-        user = CustomUser.objects.get(
-            nick_telegram=update.effective_chat.username)
+        user = CustomUser.objects.get(nick_telegram=update.effective_chat.username)
         user.chat_id_telegram = update.effective_chat.id
         user.save()
         return user
@@ -66,7 +70,7 @@ class Command(BaseCommand):
 
     @database_sync_to_async
     def habits_top(self, update):
-        """ Вывести 10 последних публичных задач"""
+        """Вывести 10 последних публичных задач"""
         habits = Habit.objects.filter(public=True).order_by("-id")
         habit_list = "10 новых публичных привычек: :\n"
         i = 1
@@ -95,8 +99,7 @@ class Command(BaseCommand):
             else:
                 # найдено - записываем туда chat_id и пишем - ок
                 await update.message.reply_text(
-                    "Пожалуйста, выберите:",
-                    reply_markup=self.button_bot(update)
+                    "Пожалуйста, выберите:", reply_markup=self.button_bot(update)
                 )
 
         async def button(update, _):
@@ -124,11 +127,7 @@ class Command(BaseCommand):
             await query.edit_message_text(text=f"{habit_list}")
 
         # Токен телеграма
-        application = (
-            ApplicationBuilder()
-            .token(BOT_TOKEN)
-            .build()
-        )
+        application = ApplicationBuilder().token(BOT_TOKEN).build()
         # Добавить обработчик /start
         start_handler = CommandHandler("start", start)
         application.add_handler(start_handler)

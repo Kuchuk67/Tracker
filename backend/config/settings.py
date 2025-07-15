@@ -17,14 +17,18 @@ from pathlib import Path
 from django.core.management.utils import get_random_secret_key
 from dotenv import load_dotenv
 
+
 # Загрузка переменных из .env-файла
 load_dotenv()
+MY_HOST = os.getenv("MY_HOST")
 
-SQL_HOST = os.getenv("SQL_HOST")
-SQL_DATABASE = os.getenv("SQL_DATABASE")
-SQL_USER = os.getenv("SQL_USER")
-SQL_PASS = os.getenv("SQL_PASS")
-SQL_PORT = os.getenv("SQL_PORT")
+SQL_HOST = os.getenv("POSTGRES_HOST")
+SQL_DATABASE = os.getenv("POSTGRES_DB")
+SQL_USER = os.getenv("POSTGRES_USER")
+SQL_PASS = os.getenv("POSTGRES_PASSWORD")
+SQL_PORT = os.getenv("POSTGRES_PORT")
+
+DBENGINE = os.getenv("DBENGINE")
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 
@@ -39,7 +43,7 @@ SECRET_KEY = get_random_secret_key()
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [MY_HOST]
 
 # Application definition
 
@@ -94,9 +98,10 @@ ASGI_APPLICATION = "myproject.asgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "ENGINE": DBENGINE,
         "NAME": SQL_DATABASE,
         "USER": SQL_USER,
         "PASSWORD": SQL_PASS,
@@ -110,8 +115,7 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME":
-            "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
         "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
@@ -133,7 +137,6 @@ TIME_ZONE = "Europe/Moscow"
 USE_I18N = True
 
 USE_TZ = True
-
 
 
 # Static files (CSS, JavaScript, Images)
@@ -162,12 +165,9 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
-    "DEFAULT_SCHEMA_CLASS":
-        "drf_spectacular.openapi.AutoSchema",
-    "DEFAULT_PAGINATION_CLASS":
-        "rest_framework.pagination.LimitOffsetPagination",
-    "PAGE_SIZE":
-        5,
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    "PAGE_SIZE": 5,
 }
 
 # Настройки срока действия токенов
@@ -180,7 +180,7 @@ SPECTACULAR_SETTINGS = {
     "SCHEMA_PATH_PREFIX": "/api/v[0-9]",
     "TITLE": "Habit Project API",
     "DESCRIPTION": "В рамках проекта реализована бэкенд-часть "
-                   "SPA веб-приложения - трекер полезных привычек.",
+    "SPA веб-приложения - трекер полезных привычек.",
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,
     # OTHER SETTINGS

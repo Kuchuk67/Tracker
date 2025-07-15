@@ -1,0 +1,27 @@
+подготовка удаленного сервера к работе с докером
+
+1. подключаемся по SSH
+```ssh -l my_user@my_ip```
+
+2. Обновляем индексы пакетов apt
+```sudo apt update```
+
+3. устанавливаем poetry
+```curl -sSL https://install.python-poetry.org | python3 -```
+
+4. Устанавливаем дополнительные пакеты
+```sudo apt install curl software-properties-common ca-certificates apt-transport-https -y```
+
+5. Устанавливаем Докер
+```sudo apt install docker.io```
+перезапустить сервер
+проверить работу докера - ```sudo docker ps```
+
+6. Устанавливаем Докер-Компоуз
+```sudo apt-get install docker-compose-plugin```
+проверка ```docker-compose version```
+
+
+
+
+

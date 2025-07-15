@@ -3,4 +3,8 @@
 set -o errexit
 set -o nounset
 
+cd backend
+
 celery -A config beat
+
+

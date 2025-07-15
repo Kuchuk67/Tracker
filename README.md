@@ -14,7 +14,64 @@
 а также 10 последних публичных привычек
 
 
-# Установка 
+# установка на удаленном сервере
+подготовка удаленного сервера к работе
+На машине должны быть установлены Python 3.12, Poetry, Docker, Docker-compose
+
+1. подключаемся по SSH
+```ssh -l my_user@my_ip```
+2. Обновляем индексы пакетов 
+```
+sudo apt update -y
+sudo apt upgrade -y
+```
+3. устанавливаем poetry
+```curl -sSL https://install.python-poetry.org | python3 -```
+4. Устанавливаем дополнительные пакеты
+```sudo apt install curl software-properties-common ca-certificates apt-transport-https -y```
+5. Устанавливаем Докер
+
+https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
+
+
+
+```
+curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+chmod +x /usr/local/bin/docker-compose
+```
+проверка ```docker-compose version```
+
+
+установка непосредственно приложения
+
+
+```
+git clone https://github.com/Kuchuk67/Tracker.git -b deploy
+```
+```
+cd Tracker/backend
+```
+В этой категории создать по примеру файла .env_example
+файл .env
+
+```
+cd ../
+```
+
+```
+sudo docker compose  up 
+```
+
+
+
+
+
+
+
+
+
+# Установка на локальном докере
 ! Бэкенд часть находится в папке 'backend'
 При инсталляции установите рабочий каталог ./backend
 ~\Projects\Tracker\backend

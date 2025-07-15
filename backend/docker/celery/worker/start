@@ -3,4 +3,6 @@
 set -o errexit
 set -o nounset
 
+cd backend
+
 celery -A config worker --uid=nobody --gid=nogroup

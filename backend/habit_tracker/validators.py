@@ -71,7 +71,7 @@ class HabitNiceValid:
                     dict(
                         error="ValidationError",
                         serial="У 'приятной' не должно быть "
-                               "связанной или вознаграждения",
+                        "связанной или вознаграждения",
                     )
                 )
 

@@ -1,3 +1,4 @@
+
 # Указываем базовый образ
 FROM python:3.12
 ENV POETRY_VIRTUALENVS_CREATE=false
@@ -11,7 +12,11 @@ RUN pip install poetry
 COPY ./backend/pyproject.toml ./
 RUN poetry install --no-root
 
-COPY ./backend .
+COPY . .
+
+#RUN cd ./backend/config
+#RUN sed -i 's/ALLOWED_HOSTS = \[\]/ALLOWED_HOSTS = \["${{ MY_SERVER }}"\]/1' settings.py 
+#RUN cd ../../
 
 COPY ./backend/docker/django/start /start
 RUN sed -i 's/\r$//g' /start
@@ -26,5 +31,5 @@ RUN sed -i 's/\r$//g' /start_celerybeat
 RUN chmod +x /start_celerybeat
 
 EXPOSE 8000
-
-#CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# ENTRYPOINT ["/start"]
+#CMD ["/start"]
